@@ -1,0 +1,52 @@
+[user]
+   name = Daniel Noland
+   email = daniel.noland@gmail.com
+	signingkey = 68D715BC3E03BEFB3485A81EB540F2BB188873FF
+[transfer]
+   fsckobjects = true
+[fetch]
+   fsckobjects = true
+[receive]
+   fsckobjects = true
+[push]
+   default = simple
+[color]
+   branch = auto
+   diff = auto
+   status = auto
+   ui = true
+[alias]
+   st = status
+   ci = commit
+   br = branch
+   co = checkout
+   df = diff
+   lg = log -p --show-signature
+   lgg = log --pretty=format:'%s' --graph
+   lg1 = log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
+   lg2 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all
+  #tree = "forest --pretty=format:\"%C(magenta)(%ar) %C(blue)%an %C(reset)%s\" --style=15"
+   files = ls-tree -r --name-only --full-tree HEAD
+
+[web]
+   browser = chrome
+[browser "chrome"]
+   cmd = /usr/bin/google-chrome-beta
+[credential]
+   helper = cache --timeout=3600
+[merge]
+   tool = splice
+[mergetool "diffconflicts"]
+   cmd = diffconflicts vim $BASE $LOCAL $REMOTE $MERGED
+   trustExitCode = true
+   keepBackup = false¬
+[mergetool "splice"]
+   cmd = "vim -f $BASE $LOCAL $REMOTE $MERGED -c 'SpliceInit'"
+   keepBackup = false
+   trustExitCode = true
+[commit]
+   gpgsign = true
+[diff]
+   difftool = splice
+[core]
+   pager = less -F -X

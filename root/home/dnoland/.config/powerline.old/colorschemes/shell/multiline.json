@@ -1,0 +1,20 @@
+{
+   "name": "Multiline color scheme for shell prompts",
+   "groups": {
+      "user":           { "fg": "white", "bg": "darkestpurple", "attr": ["bold"] },
+      "hostname":       { "fg": "brightyellow", "bg": "mediumorange", "attr": ["bold"] },
+      "jobnum":         { "fg": "brightyellow", "bg": "mediumorange", "attr": [] },
+      "exit_fail":      { "fg": "white", "bg": "darkestred", "attr": [] },
+      "exit_success":   { "fg": "white", "bg": "darkestgreen", "attr": [] },
+      "environment":    { "fg": "white", "bg": "darkestgreen", "attr": [] },
+      "mode":           { "fg": "darkestgreen", "bg": "brightgreen", "attr": ["bold"] },
+      "divider":        { "fg": "white", "bg": "gray8", "attr": [] }
+   },
+   "mode_translations": {
+      "vicmd": {
+         "groups": {
+            "mode": {"fg": "darkestcyan", "bg": "white", "attr": ["bold"] }
+         }
+      }
+   }
+}

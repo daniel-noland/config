@@ -1,0 +1,40 @@
+{
+    "border": "none",
+    "current_border_width": 0,
+    "floating": "user_off",
+    "geometry": {
+       "height": 598,
+       "width": 1892,
+       "x": 13,
+       "y": 300
+    },
+    "name": "chat",
+    "percent": 0.5,
+    "swallows": [
+       {
+       "class": "^Pidgin$"
+       }
+    ],
+    "type": "con"
+}
+
+{
+    "border": "none",
+    "current_border_width": 0,
+    "floating": "auto_off",
+    "geometry": {
+       "height": 100,
+       "width": 240,
+       "x": 0,
+       "y": 0
+    },
+    "name": "skype",
+    "percent": 0.5,
+    "swallows": [
+       {
+       "class": "^Skype$"
+       }
+    ],
+    "type": "con"
+}
+

@@ -1,0 +1,292 @@
+export PATH="${HOME}/.bin:${PATH}"
+export TERM='screen-256color'
+# Source my aliases
+if [ -f ~/.aliasrc ]; then
+    source ~/.aliasrc
+fi
+
+_dmenu() {
+   dmenu -fn 'Droid Sans Mono-20' -l 4 $*
+}
+
+if [ -n "${TMUX}" ]; then
+vim() {
+   nvsock=/tmp/nvimsocket
+   if [ -S "${nvsock}" ]; then
+      for f in "${@}"; do
+         nvr --remote "${f}" -c 'doau BufEnter'
+      done
+      tmux select-window -t "nvim"
+   else
+      NVIM_LISTEN_ADDRESS="${nvsock}" nvim ${@}
+   fi
+}
+fi
+
+psgrep() {
+    if [ ! -z $1 ] ; then
+        echo "Grepping for processes matching $1..."
+        ps aux | grep $1 | grep -v grep
+    else
+        echo "!! Need name to grep for"
+    fi
+}
+
+grep() {
+   command grep --color $*
+}
+
+# Extract the file whatever it is
+extract () {
+    for i in $*; do
+       if [ -e "$i" ]; then
+           case "$i" in
+               *.tar.bz2)        new=$(basename --suffix .tar.bz2 "$i") && tar xjf "$i"        ;;
+               *.tar.gz)         new=$(basename --suffix .tar.gz "$i") && tar xzf "$i"        ;;
+               *.bz2)            new=$(basename --suffix .bz2 "$i") && bunzip2 "$i"        ;;
+               *.rar)            new=$(basename --suffix .rar "$i") && unrar x "$i"        ;;
+               *.gz)             new=$(basename --suffix .gz "$i") && gunzip "$i"         ;;
+               *.tar)            new=$(basename --suffix .tar "$i") && tar xf "$i"         ;;
+               *.tbz2)           new=$(basename --suffix .tbz2 "$i") && tar xjf "$i"        ;;
+               *.tgz)            new=$(basename --suffix .tgz "$i") && tar xzf "$i"        ;;
+               *.zip)            new=$(basename --suffix .zip "$i") && unzip "$i"          ;;
+               *.Z)              new=$(basename --suffix .Z "$i") && uncompress "$i"     ;;
+               *.gpg)            new=$(basename --suffix .gpg "$i") && gpg -d "$i" > "$new" ;;
+               *.scrypt)         new=$(basename --suffix .scrypt "$i") && scrypt dec "$i" > "$new" ;;
+               *.bundle)         new=$(basename --suffix .bundle "$i") && unbundle "$i" ;;
+               *)                new="___--#EXTRACTION COMPLETE#--___" && return 1 ;;
+           esac
+           retCode=$?
+           echo "$new"
+           return ${retCode}
+       else
+           echo "___--#EXTRACTION COMPLETE#--___"
+           return 1
+       fi
+    done
+}
+
+# recursively extract files
+rxtr() {
+   for i in $*; do
+      new=$(extract "$i")
+      retcode=$?
+      echo ${new}
+      while (( retcode == 0 )); do
+         new=$(extract "$new")
+         retcode=$?
+         echo ${new}
+      done
+   done
+}
+
+# bundle up a file, and generate checksums
+# bundle() {
+#    bundleCommand="tar"
+#    bundleArgs="czvf"
+#    bundleSuffix="tar.gz"
+#    wrapArgs="cvf"
+#    wrapSuffix="tar"
+#    hashes=(md5 sha1 sha224 sha256 sha384 sha512)
+#    if [ -d "$i" ]; then
+#       echo "Bundling $i"
+#       
+#       for i in $*; do
+#             dataLoc="$i.$bundleSuffix"
+#             $bundleCommand $bundleArgs "$dataLoc" "$i"
+#             bundleLoc="$i".bundle
+#             mkdir "$bundleLoc"
+#             dataLoc="$i"."$bundleSuffix"
+#             mv "$dataLoc" "$bundleLoc"
+#             dataName="$i.$bundleSuffix"
+#             dataLoc="$bundleLoc/$i.$bundleSuffix"
+#             checksumDir="$bundleLoc"
+#             [ ! -d "$checksumDir" ] && mkdir "$checksumDir"
+#             currentDir=$(pwd)
+#             cd "$checksumDir"
+#             for hash in $hashes; do
+#                CMD="$hash"sum
+#                echo "computing $CMD"
+#                $CMD "$dataName" > "${dataName}.${hash}"
+#             done
+#             gpg --detach-sign --armor "$dataName"
+#             cd "$currentDir"
+#             wrapName="$i.bundle.$wrapSuffix"
+#             $bundleCommand $wrapArgs "$wrapName" "$bundleLoc" && rm -r "$bundleLoc"
+#       done
+#    fi
+# }
+#
+# # bundle and gpg encrypt
+# gbundle() {
+#    bundle $*
+#    for i in $*; do
+#       gpg --encrypt --sign "$i.bundle.tar"
+#    done
+# }
+#
+# # bundle and scrypt
+# sbundle() {
+#    bundle $*
+#    for i in $*; do
+#       echo "scrypting $i.bundle.tar:"
+#       scrypt enc "$i.bundle.tar" > "$i.bundle.tar.scrypt"
+#    done
+# }
+#
+# # sbundle, then gbundle
+# sgbundle() {
+#    bundle $*
+#    for i in $*; do
+#       scrypt enc "$i.bundle.tar" > "$i.bundle.tar.scrypt"
+#       gpg --encrypt --sign "$i.bundle.tar.scrypt"
+#    done
+# }
+#
+# # sbundle, then gbundle, then clean up the mess (mostly)
+# sgbundle_clean() {
+#    bundle $*
+#    for i in $*; do
+#       scrypt enc "$i.bundle.tar" > "$i.bundle.tar.scrypt"
+#       gpg --encrypt --sign "$i.bundle.tar.scrypt"
+#       echo "Cleaning $i.bundle.tar and $i.bundle.tar.scrypt"
+#       shred "$i.bundle.tar" "$i.bundle.tar.scrypt"
+#    done
+# }
+#
+# # undo the bundle process, and check each file
+# unbundle() {
+#    green="2"
+#    red="1"
+#    bold="bold"
+#    hashes=(md5 sha1 sha224 sha256 sha384 sha512)
+#    bFile="$1"
+#    echo -e "$(tput setaf $green)$(tput $bold)Unbundling $bFile$(tput sgr 0)"
+#    bundleBasename=$(echo "$bFile" | perl -pe 's|(.*?\.bundle)\..*|\1|')
+#    rawBasename=$(echo "$bFile" | perl -pe 's|(.*?)\..*|\1|')
+#    echo "Transforming to $rawBasename"
+#    [ ! -n "$bundleBasename" ] && echo ".bundle not in file name!" && return 1
+#    currentDir=$(pwd)
+#    [ -d "$bundleBasename" ] && cd "$bundleBasename" || return 1
+#    for hash in $hashes; do
+#       RESULT=$(${hash}sum -c "$rawBasename.tar.gz.$hash" 2>&1)
+#       color=${red}
+#       echo $RESULT | grep -q OK$
+#       if [ $? = 0 ]; then
+#          color=${green}
+#       fi
+#       echo -e "$(tput setaf $color)$(tput $bold)${hash}sum for $rawBasename.tar.gz: ${RESULT}$(tput sgr 0)"
+#    done
+#    file "$rawBasename.tar.gz.asc" | grep -q "PGP signature"
+#    [ $? = 0 ] && gpgOut=$(gpg -v "$rawBasename.tar.gz.asc" 2>&1)
+#    echo -e ${gpgOut} | grep -q "Good signature"
+#    if [ $? = 0 ]; then
+#       color=${green}
+#    else
+#       color=${red}
+#    fi
+#    relevantOutput=$(echo -e "${gpgOut}" | grep "Signature made\|Good signature\|aka")
+#    echo -e "$(tput setaf $color)$(tput $bold)${relevantOutput}$(tput sgr 0)"
+#    rxtr "$rawBasename.tar.gz"
+#    [ -e "$rawBasename" ] && mv "$rawBasename" "$currentDir"
+#    cd "$currentDir"  
+# }
+
+# Kills any process that matches a regexp passed to it
+killit() {
+    ps aux | grep -v "grep" | grep "$@" | awk '{print $2}' | xargs sudo kill
+}
+
+mcd() {
+   mkdir "$1" && cd "$1";
+}
+
+#placate gpg-agent
+export GPG_TTY=$(tty)
+
+#print the current shell
+shell () {
+     ps | grep $(echo $$) | awk '{ print $4 }'
+}
+
+#automatically switch to using the git protocol over http when cloning from git hub
+github_clone() {
+   git clone $(echo "$*" | sed 's/https\:\/\//git\:\/\//')
+}
+
+#make a pgp signatue of a file
+sign() { 
+   gpg -b --armor "$*"
+}
+
+#make a file from the currently sellected X text (primary clipboard)
+cb.put() {
+   xclip -selection clipboard -o >> "$1"
+}
+
+#slurp the selected files into the X clipboard
+cb.slurp() {
+   xclip -selection clipboard -i <(cat $*)
+}
+
+pumount() {
+   while read line
+   do
+      command pumount $line
+   done < <(command pmount | grep \^/dev/ | cut -d' ' -f1)
+}
+
+synergyc.crypt() {
+   targetServer="$1"
+   securePathConfigured=false
+   sshPortForwards=$(netstat -tpln | grep -e "tcp.*127.0.0.1:24800" -e 'tcp6.*::1:24800' | grep -P 'LISTEN\s+\d+/ssh\s+$' | wc -l)
+   if [ "$sshPortForwards" -lt 1 ]; then
+      ssh -o "IPQoS lowdelay" -f -N -L localhost:24800:${targetServer}:24800  ${targetServer} || return 1
+   fi
+   sshPortForwards=$(netstat -tpln | grep -e "tcp.*127.0.0.1:24800" -e 'tcp6.*::1:24800' | grep -P 'LISTEN\s+\d+/ssh\s+$' | wc -l)
+   if [ "$sshPortForwards" -lt 1 ]; then
+      echo "FAIL: Could not construct secure tunnel."
+      return 1
+   else
+      securePathConfigured=true
+   fi
+   if $securePathConfigured; then
+      synergyc -d WARNING localhost:24800
+      return 0
+   fi
+   echo "FAIL: Unknown error!"
+   return 3
+}
+
+gen_password() {
+   openssl rand -base64 "$1" | tr '\n' " " | sed 's| ||g'
+}
+
+deep_crypt() {
+   memFraction=0.2
+   time=60
+   target="$1"
+   command scrypt enc -m ${memFraction} -t ${time} "$1" > "${1}.scrypt"
+}
+
+auto_open() {
+   rifle "${1}"
+}
+
+j() {
+   cd $(mrused_dir "${1}")
+}
+
+mrused() {
+   echo "$(fasd -l -a ${1} | _dmenu)"
+}
+
+mrused_dir() {
+   echo -e "$(fasd -l -d ${1} | _dmenu)"
+}
+
+jj() {
+   target="$(mrused ${1})"
+   [[ -d "${target}" ]] && cd "${target}" && return 0;
+   [[ -f "${target}" ]] && auto_open "${target}" && return $?
+}

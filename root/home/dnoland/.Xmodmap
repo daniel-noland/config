@@ -1,0 +1,6 @@
+clear lock
+clear Control
+keycode 66 = Control_L
+keycode 37 = Control_L
+keycode 109 = Control_R
+add Control = Control_L Control_R

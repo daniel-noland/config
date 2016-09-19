@@ -1,0 +1,37 @@
+
+[roxterm profile]
+full_screen=1
+hide_menubar=1
+always_show_tabs=0
+show_resize_grip=0
+audible_bell=0
+visible_bell=1
+cursor_shape=1
+cursor_blink_mode=1
+scrollbar_pos=0
+scrollback_lines=10000
+scroll_on_keystroke=0
+backspace_binding=2
+disable_menu_access=1
+disable_menu_shortcuts=1
+disable_tab_menu_shortcuts=1
+font=Droid Sans Mono for Powerline 22
+browser=chromium
+mailer=chromium
+colour_scheme=Default
+match_plain_files=1
+filer=
+dir_filer=
+dir_spawn_type=1
+color_term=screen-256color
+term=screen-256color
+background_type=1
+background_img=/home/dnoland/.config/roxterm.sourceforge.net/darkbackground.jpg
+scroll_background=0
+delete_binding=3
+width=100
+height=40
+saturation=0.504000
+bell_highlights_tab=0
+scroll_on_output=1
+show_add_tab_btn=0

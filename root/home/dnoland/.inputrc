@@ -1,0 +1,4 @@
+set editing-mode vi
+set keymap vi
+"\C-OB": history-search-backward
+"\C-OA": history-search-forward

@@ -1,0 +1,29 @@
+{
+   "default_module": "powerline.segments.common",
+   "segments": {
+      "right": [
+         {
+            "function": "now_playing",
+            "args": {
+               "player": "mpd"
+            },
+            "priority": 30,
+            "draw_soft_divider": true
+         },
+         {
+            "function": "date"
+         },
+         {
+            "function": "date",
+            "name": "time",
+            "args": {
+               "format": "%H:%M",
+               "istime": true
+            }
+         },
+         {
+            "function": "hostname"
+         }
+      ]
+   }
+}

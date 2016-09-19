@@ -1,0 +1,36 @@
+
+[school/computerSystems/lab1]
+checkout = git clone 'git@bitbucket.org:daniel-noland/school.computersystems.lab1.git' 'lab1'
+
+[school/computerSystems/lab2]
+checkout = git clone 'git@bitbucket.org:daniel-noland/school.computersystems.lab2.git' 'lab2'
+
+[school/computerSystems/recitationExercise1]
+checkout = git clone 'git@bitbucket.org:daniel-noland/school.computersystems.recitationexercise1.git' 'recitationExercise1'
+
+[school/computerSystems/recitationExercise2]
+checkout = git clone 'git@bitbucket.org:daniel-noland/school.computersystems.recitationexercise2.git' 'recitationExercise2'
+
+[school/dataStructures/lab1]
+checkout = git clone 'git@bitbucket.org:daniel-noland/school.datastructures.lab1.git' 'lab1'
+
+[school/dataStructures/homework0]
+checkout = git clone 'git@bitbucket.org:daniel-noland/school.datastructures.homework0.git' 'homework0'
+
+[school/dataStructures/homework1]
+checkout = git clone 'git@bitbucket.org:daniel-noland/school.datastructures.homework1.git' 'homework1'
+
+[school/dataStructures/lab2]
+checkout = git clone 'git@bitbucket.org:daniel-noland/school.datastructures.lab2.git' 'lab2'
+
+[school/dataStructures/lab3]
+checkout = git clone 'git@bitbucket.org:daniel-noland/school.datastructures.lab3.git' 'lab3'
+
+[school/dataStructures/lab4]
+checkout = git clone 'git@bitbucket.org:daniel-noland/school.datastructures.lab4.git' 'lab4'
+
+[school/dataStructures/labExam1]
+checkout = git clone 'git@bitbucket.org:daniel-noland/school.datastructures.labexam1.git' 'labExam1'
+
+[school/dataStructures/test1review]
+checkout = git clone 'git@bitbucket.org:daniel-noland/school.datastructures.test1review.git' 'test1review'

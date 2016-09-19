@@ -1,0 +1,91 @@
+" vim: ft=vim
+" Note: Skip initialization for vim-tiny or vim-small.
+ if !1 | finish | endif
+
+ if has('vim_starting')
+   if &compatible
+     set nocompatible               " Be iMproved
+   endif
+
+   " Required:
+   set runtimepath+=~/.vim/bundle/neobundle.vim/
+ endif
+
+ " Required:
+ call neobundle#begin(expand('~/.vim/bundle/'))
+
+ " Let NeoBundle manage NeoBundle
+ " Required:
+ NeoBundleFetch 'Shougo/neobundle.vim'
+
+ " My Bundles here:
+ " " Refer to |:NeoBundle-examples|.
+ " " Note: You don't set neobundle setting in .gvimrc!
+   NeoBundle 'WolfgangMehner/vim-plugins'
+   NeoBundle 'kien/rainbow_parentheses.vim'
+   NeoBundle 'majutsushi/tagbar'
+   NeoBundle 'scrooloose/nerdtree'
+   NeoBundle 'scrooloose/syntastic'
+   NeoBundle 'terryma/vim-multiple-cursors'
+   NeoBundle 'tpope/vim-fugitive'
+   NeoBundle 'tpope/vim-surround'
+   NeoBundle 'tpope/vim-jdaddy'
+   NeoBundle 'tpope/vim-repeat'
+   NeoBundle 'tpope/vim-dispatch'
+   NeoBundle 'vim-scripts/Color-Sampler-Pack'
+   NeoBundle 'vim-scripts/L9'
+   NeoBundle 'vim-scripts/ctrlp.vim'
+   NeoBundle 'xolox/vim-misc'
+   NeoBundle 'rstacruz/sparkup'
+   NeoBundle 'tobyS/skeletons.vim'
+   NeoBundle 'ervandew/supertab'
+   NeoBundle 'mbbill/undotree'
+   NeoBundle 'airblade/vim-gitgutter'
+   NeoBundle 'saihoooooooo/glowshi-ft.vim'
+   NeoBundle 'Chiel92/vim-autoformat'
+   NeoBundle 'rodjek/vim-puppet'
+   NeoBundle 'Shougo/vimproc.vim', {
+   \ 'build' : {
+   \     'windows' : 'tools\\update-dll-mingw',
+   \     'cygwin' : 'make -f make_cygwin.mak',
+   \     'mac' : 'make -f make_mac.mak',
+   \     'linux' : 'make -j5',
+   \     'unix' : 'gmake',
+   \    },
+   \ }
+   NeoBundle 'kshenoy/vim-signature'
+   NeoBundle 'michaeljsmith/vim-indent-object'
+   NeoBundle 'gregsexton/MatchTag'
+   NeoBundle 'osyo-manga/vim-over'
+   NeoBundle 'tomtom/tcomment_vim'
+   NeoBundle 'jistr/vim-nerdtree-tabs'
+   NeoBundle 'mxw/vim-jsx'
+   NeoBundle 'leafgarland/typescript-vim'
+   NeoBundle 'Quramy/tsuquyomi'
+   NeoBundle 'pangloss/vim-javascript'
+   NeoBundle 'itchyny/lightline.vim'
+   NeoBundle 'drmikehenry/vim-extline'
+   NeoBundle 'Shougo/deoplete.nvim'
+   NeoBundle 'Floobits/floobits-neovim'
+   function! DoRemoteUpdate(arg)
+      NeoBundleUpdate
+   endfunction
+   NeoBundle 'Shougo/deoplete.nvim', { 'do': function('DoRemoteUpdate') }
+
+   " Experiments
+   " NeoBundle 'FooSoft/vim-argwrap'
+   NeoBundle 'critiqjo/lldb.nvim'
+   NeoBundle 'jalvesaq/vimcmdline'
+   NeoBundle 'christoomey/vim-tmux-navigator'
+   " NeoBundle 'SirVer/ultisnips'
+   " NeoBundle 'honza/vim-snippets'
+
+
+ call neobundle#end()
+
+ " Required:
+ filetype plugin indent on
+
+ " If there are uninstalled bundles found on startup,
+ " this will conveniently prompt you to install them.
+ NeoBundleCheck

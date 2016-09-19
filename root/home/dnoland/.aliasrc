@@ -1,0 +1,46 @@
+export EDITOR=$(which nvim || which vim)
+export PAGER=less
+export MULTIPLEXER=tmux
+alias screen=${MULTIPLEXER}
+alias tmux=${MULTIPLEXER}
+alias less=${PAGER}
+#alias vimpager=${PAGER}
+alias more=${PAGER}
+alias most=${PAGER}
+#system commands
+#Shortcuts
+alias xx="fg || exit"
+alias c="clear"
+alias cl="clear; ls"
+alias cla="clear; ls -a"
+alias clla="clear; ls -la"
+#List commands
+alias l="ls --color=always"
+alias sl="ls --color=always"
+alias la="ls -a --color=always"
+alias ll="ls -l -h --color=always"
+alias lsl="ls --color=always | ${PAGER}"
+alias lll="ls -l -h --color=always | ${PAGER}"
+alias lla="ls -la"
+alias vi="vim"
+#Screen commands
+alias tree="tree --charset utf8"
+alias cb="xclip -selection clipboard"
+#alias v=${EDITOR}
+
+# enable color support of ls and also add handy aliases
+if [ "$TERM" != "dumb" ]; then
+    eval "`dircolors -b`"
+    alias ls='ls --color=auto'
+    alias dir='ls --color=auto --format=vertical'
+    alias vdir='ls --color=auto --format=long'
+fi
+
+# This adds a paste bin command
+alias pbin="curl -F 'sprunge=<-' http://sprunge.us"
+
+#alias im="pipe2pidgin --user daniel.noland"
+
+[[ -x $(which vimcat) ]] && alias vimcat='vimcat -c "set noloadplugins" -u ~/.config/nvim/init.vim'
+
+[[ -x $(which tsc) ]] && alias tsr='tsc --jsx react --outFile >(vimcat -c "set noloadplugins" -c "setf typescript" -u ~/.config/nvim/init.vim)'

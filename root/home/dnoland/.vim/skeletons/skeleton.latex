@@ -1,0 +1,248 @@
+\documentclass[
+12pt,
+letterpaper,
+reprint,
+%superscriptaddress,
+%groupedaddress,
+%unsortedaddress,
+%runinaddress,
+%frontmatterverbose,
+%preprint,
+%showpacs,
+%preprintnumbers,
+nofootinbib,
+nobibnotes,
+%bibnotes,
+ amsmath,
+ amssymb,
+ aps,
+pra,
+%prb,
+%rmp,
+%prstab,
+%prstper,
+%floatfix,
+%draft
+]{report}
+%]{revtex4-1}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{enumerate}
+\usepackage{xfrac}
+\usepackage{empheq}
+\usepackage{fp}
+\usepackage{fancybox}
+\usepackage{color}
+\usepackage{float}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+%\usepackage{ulem}
+\usepackage{braket}
+\usepackage{fancyvrb}
+\usepackage{listings}
+\usepackage{tikz}
+\usepackage{hf-tikz}
+\usepackage{multirow}
+\usepackage{nicefrac}
+\usepackage{units}
+\usepackage{textcase}
+\usepackage{dcolumn}
+\usepackage{bm}
+\usepackage{pdflscape}
+%\usepackage{url}
+\usepackage[hyperindex,breaklinks]{hyperref}
+\usepackage[hyphenbreaks]{breakurl}
+\usepackage[final]{pdfpages}
+\usepackage[subrefformat=parens,labelformat=parens]{subfig}
+\usepackage[square,numbers,sort&compress]{natbib}
+\usepackage[mathscr]{euscript}
+\usepackage{draftwatermark}
+\usepackage{amsthm}
+\usepackage{epigraph}
+\usepackage{etoolbox}
+%\usepackage{dblfloatfix}
+\usepackage{xcolor}
+\usepackage[most]{tcolorbox}
+\usepackage[framemethod=tikz]{mdframed}
+\usepackage{caption}
+%\usepackage{subcaption}
+\usepackage[]{minted}
+\usepackage{calc}
+\usepackage{longtable}
+\usepackage{tkz-berge}
+
+%package configuration
+\interfootnotelinepenalty=10000
+%\SetWatermarkScale{6}
+%\SetWatermarkLightness{0.8}
+\usetikzlibrary{arrows, petri, topaths, tikzmark, shadows}
+\usetikzlibrary{decorations.pathreplacing}
+\usetikzlibrary{positioning}
+\definecolor{light-blue}{RGB}{240, 240, 255}
+\DefineVerbatimEnvironment{code}{Verbatim}{fontsize=\small}
+\setlength\epigraphwidth{8cm}
+\setlength\epigraphrule{0pt}
+\makeatletter
+%\patchcmd{\epigraph}{\@epitext{#1}}{\itshape\@epitext{#1}}{}{}
+\makeatother
+%macros:
+\newcommand{\dbyd}[1]{\frac{\mathrm{d}}{\mathrm{d}#1}}
+\newcommand{\Wfk}{\Ket{\Psi\left(t\right)}}
+\newcommand{\Wfb}{\Bra{\Psi\left(t\right)}}
+\newcommand{\wfk}{\Ket{\psi}}
+\newcommand{\wfb}{\Bra{\psi}}
+\newcommand{\up}{\Ket{\uparrow}}
+\newcommand{\dn}{\Ket{\downarrow}}
+\newcommand{\upa}{\Bra{\uparrow}}
+\newcommand{\dna}{\Bra{\downarrow}}
+\newcommand{\hlight}[1]{\colorbox{yellow}{#1}}
+\newcommand{\Mat}[1]{\ensuremath{\left[\mathbf{#1}\right]}}
+\newcommand{\V}[1]{\ensuremath{\left{\mathbf{#1}\right}}}
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+            \vertex[shape=circle,draw,inner sep=2pt] (char) {#1};}}
+\newcommand{\Lg}[1]{\ensuremath{\mathrm{lg}\!\left( #1 \right)}}
+\newcommand{\Log}[2]{\ensuremath{\mathrm{log}_{#2}\!\left( #1 \right)}}
+\newcommand{\Ln}[1]{\ensuremath{\mathrm{ln}\!\left( #1 \right)}}
+\newcommand{\Li}[2]{\ensuremath{\mathrm{Li}_{#1}\!\left( #2 \right)}}
+\newcommand{\cint}[2]{\ensuremath{\oint_\Gamma\!\!\mathrm{d}#1{#2}}}
+\newcommand{\tense}{\otimes}
+\newcommand{\Tense}{\bigotimes}
+\newcommand{\dsum}{\oplus}
+\newcommand{\Dsum}{\bigoplus}
+\newcommand{\adj}[1]{#1^{\dagger}}
+\newcommand{\op}[1]{\ensuremath{\widehat{#1}}}
+\newcommand{\mes}[1]{\ensuremath{\Omega\!\left[ \op{#1} \right]}}
+\newcommand{\graph}[1]{\ensuremath{\mathcal{#1}}}
+\newcommand{\opp}[1]{\ensuremath{\widetilde{#1}}}
+\newcommand{\Time}[1]{\ensuremath{\mathrm{T}\!\left(#1\right)}}
+\newcommand{\Size}[1]{\ensuremath{\mathcal{S}\!\left(#1\right)}}
+\newcommand{\UpperBound}[1]{\ensuremath{O\!\left(#1\right)}}
+\newcommand{\Order}[1]{\ensuremath{O\!\left(#1\right)}}
+\newcommand{\LowerBound}[1]{\ensuremath{\Omega\!\left(#1\right)}}
+\newcommand{\Bound}[1]{\ensuremath{\Theta\!\left(#1\right)}}
+\newcommand\OR{\ensuremath{\mathbin{\vee}}}
+\newcommand\AND{\ensuremath{\mathbin{\wedge}}}
+\newcommand\NOT{\ensuremath{\mathbin{\neg}}}
+\newcommand\XOR{\ensuremath{\mathbin{\oplus}}}
+\newcommand\IFF{\ensuremath{\mathbin{\Leftrightarrow}}}
+\newcommand\THEN{\ensuremath{\mathbin{\Rightarrow}}}
+\newcommand{\icode}[1]{\mintinline{python}{#1}}
+
+\usetikzlibrary{fit}
+\tikzset{%
+   highlight/.style={rectangle,rounded corners,fill=blue!15!white,fill opacity=0.5,thin,inner sep=0pt},
+   offset definition/.style={%
+      above left offset={-0.1,0.45},
+      below right offset={0.1,-0.3},
+   },
+   h1/.style={%
+      offset definition,
+      fill=blue!13!white,
+      draw=blue!20!black,
+   },
+   h2/.style={%
+      offset definition,
+      fill=red!13!white,
+      draw=red!20!black,
+   },
+   h3/.style={%
+      offset definition,
+      fill=green!13!white,
+      draw=green!20!black,
+   },
+   h4/.style={%
+      offset definition,
+      fill=yellow!13!white,
+      draw=yellow!20!black,
+   },
+}
+\newcommand{\annotation}[3][h1]{\;\tikzmarkin[#1]{#2}#3\tikzmarkend{#2}\;}
+%
+
+%Theorem environments:
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+
+\newmdenv[%
+roundcorner=5pt,
+subtitlebelowline=true,subtitleaboveline=true,
+subtitlebackgroundcolor=blue!13!white,
+backgroundcolor=blue!13!white,
+frametitle={Answer},frametitlerule=true,
+frametitlebackgroundcolor=blue!5!white,
+]{answer}
+
+\tcbset{%
+  enhanced,
+  colback=blue!13!white,
+  colframe=black!5!black,
+  fonttitle=\scshape,
+  titlerule=0pt,
+  title={Answer:},
+  title style={fill=blue!13!white},
+  coltitle=blue!13!black,
+  drop shadow,
+  highlight math style={reset,colback=blue!7!white,colframe=black,boxrule=1pt}
+}
+
+% crazy annotation test
+\usetikzlibrary{arrows,tikzmark,shadows,calc}
+\usetikzmarklibrary{listings}
+
+\tikzset{%
+  comment/.style={%
+    draw,
+    fill=blue!13!white,
+    text=black,
+    rounded corners,
+    drop shadow,
+    align=left,
+  },
+}
+
+\newcommand{\mintedcomment}[5]{%
+   \FPeval{\xstart}{#1*0.85}
+   \FPeval{\ystart}{0.2 - #2*1.01}
+   \FPeval{\xshift}{#3 - 3}
+   \FPeval{\yshift}{#4 - 15}
+   \draw[<-,thick] (minted-\themymintedcounter.north west) ++(\xstart em,\ystart em) -| +(\xshift, \yshift) node[above right,comment,thin] {\roman{algostep} $|$ #5};%
+   \stepcounter{algostep}%
+}
+
+
+\lstset{%
+language=python,
+basicstyle=\small\ttfamily,
+numbers=left,
+frame=single,
+breaklines=true,
+columns=flexible,
+backgroundcolor=\color{light-blue}
+}
+
+\makeatletter
+\newcounter{algostep}
+\newcounter{mymintedcounter}
+\newif\ifshowmintedcounter
+%\edef\minted@resetoptions{\minted@resetoptions\def\minted@opt@bgcolor{foo}}
+\renewenvironment{minted@colorbg}[1]{\noindent\stepcounter{mymintedcounter}\stepcounter{algostep}\begin{lrbox}{\minted@bgbox}\begin{minipage}{.8\linewidth}}%
+ {\end{minipage}%
+  \end{lrbox}%
+  \tikz{\node[text width=\linewidth](minted-\themymintedcounter){\usebox{\minted@bgbox}}}
+  }
+\makeatother
+\tikzstyle{every picture}+=[remember picture]
+%\showmintedcountertrue
+\showmintedcounterfalse
+% crazy test
+
+\newenvironment{longlisting}{\captionsetup{type=listing}}{}
+
+\listfiles
+

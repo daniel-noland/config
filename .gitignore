@@ -1,0 +1,14 @@
+root/home/dnoland/.vim/undo/*
+root/home/dnoland/.vim/sessions/*
+root/home/dnoland/.vim/bundle/*
+root/home/dnoland/.vim/doc/*
+root/home/dnoland/.vim/history/*
+root/home/dnoland/.vim/view/*
+root/home/dnoland/.ipython/.ropeproject/
+root/home/dnoland/.ipython/profile_default/.ropeproject/
+root/home/dnoland/.ipython/profile_default/history.sqlite
+root/home/dnoland/.config/evince/print-settings
+root/home/dnoland/.vim/.netrwhist
+**.swp
+root/home/dnoland/.vim/bundle/*
+root/home/dnoland/.vim/bundle

@@ -1,0 +1,738 @@
+" vim: ft=vim
+" basic settings....
+let $PATH .= ':/usr/local/bin:/home/dnoland/.bin/'
+set laststatus=2
+set encoding=utf-8
+set termencoding=utf-8
+let g:mapleader = '\'
+let g:maplocalleader = '|'
+set nocompatible
+" colorscheme ir_black
+" colorscheme jellybeans
+" colorscheme hybrid
+colorscheme dan_custom
+" colorscheme distinguished_dan
+" colorscheme distinguished
+set bg=dark
+syntax enable
+filetype plugin indent on
+" set autoindent
+set autoread
+set noshowmode
+set relativenumber
+set foldmethod=syntax
+set foldcolumn=1
+set foldlevel=4
+set foldminlines=0
+set ttyfast
+set diffopt=filler,context:5,vertical
+set clipboard=unnamedplus
+
+" improves regular expressions
+set magic
+" set noautowrite
+set autowrite
+set lazyredraw
+set linebreak
+set shiftround
+set noshowcmd
+set noerrorbells
+set showmatch
+set showfulltag
+set switchbuf=useopen
+" set wrapscan
+" set wrapmargin=4
+set expandtab
+set smarttab
+" Don't set this with filetype plugin indent on
+" set smartindent
+set tabstop=3
+set shiftwidth=3
+set hlsearch
+set incsearch
+set history=3000
+set list
+set listchars=tab:▸\ ,eol:¬
+set hidden
+set virtualedit=block
+" set nolist
+" set textwidth=72
+" set formatoptions=cqt
+" set wrapmargin=5
+" Remove the Windows ^M - when the encodings get messed up
+" set formatoptions+=j
+command! FixEncoding mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
+
+" runtime macros/matchit.vim
+set wildmenu
+set wildmode=longest:full,full
+set ignorecase
+set smartcase
+set title
+set scrolloff=5
+set sidescrolloff=5
+set backupdir=~/.vim-tmp,~/.tmp,/var/tmp,/tmp
+set directory=~/.vim-tmp,~/.tmp,/var/tmp,/tmp
+set backspace=indent,eol,start
+set shortmess=atIWAc
+set timeoutlen=1200
+set ttimeoutlen=50
+
+" current directory is always matching the
+" content of the active window
+set autochdir
+
+" remember some stuff after quiting vim:
+" marks, registers, searches, buffer list
+set viminfo='20,<50,s10,h,%
+" Return to last edit position when opening files (You want this!)
+augroup AfterRead
+   autocmd!
+   autocmd BufReadPost *
+     \ if line("'\"") > 0 && line("'\"") <= line("$") |
+     \   exe "normal! g`\"" |
+     \ endif
+augroup END
+func! DeleteTrailingWS()
+  let l:view = winsaveview()
+  %s/\s\+$//ge
+  call winrestview(l:view)
+endfunc
+
+" TODO: move these calls functions to ftplugin files
+augroup TrailingWhiteSpace
+   autocmd!
+   autocmd BufWrite *.py :call DeleteTrailingWS()
+   autocmd BufWrite *.java :call DeleteTrailingWS()
+   autocmd BufWrite *.c :call DeleteTrailingWS()
+   autocmd BufWrite *.cpp :call DeleteTrailingWS()
+   autocmd BufWrite *.cxx :call DeleteTrailingWS()
+   autocmd BufWrite *.h :call DeleteTrailingWS()
+   autocmd BufWrite *.hh :call DeleteTrailingWS()
+   autocmd BufWrite *.hpp :call DeleteTrailingWS()
+   autocmd BufWrite *.hxx :call DeleteTrailingWS()
+   autocmd BufWrite *.sh :call DeleteTrailingWS()
+   autocmd BufWrite *.bash :call DeleteTrailingWS()
+   autocmd BufWrite *.html :call DeleteTrailingWS()
+   autocmd BufWrite *.shtml :call DeleteTrailingWS()
+   autocmd BufWrite *.js :call DeleteTrailingWS()
+   autocmd BufWrite *.latex :call DeleteTrailingWS()
+   autocmd BufWrite *.tex :call DeleteTrailingWS()
+   autocmd BufWrite *.zsh :call DeleteTrailingWS()
+augroup END
+
+command! VimGrepWordCurrentFile :execute 'vimgrep /'.expand('<cword>').'/gj '.expand('%') | copen
+" command! SmartGrepCurrentWord :silent execute "grep! -R " . shellescape(expand("<cWORD>")) | copen
+" I really need to learn Ack
+nnoremap <leader>gr :silent execute "grep! " . shellescape(expand("<cWORD>")) . " %"<cr>:copen<cr>
+
+" noremap gr :SmartGrepCurrentWord<CR>
+" noremap <leader>Gr :execute "vimgrep /" . expand("<cword>") . "/j **" <Bar> cw<CR>
+
+" " Re-select recently pasted text
+" nnoremap <leader>rs V`]
+" nnoremap <leader>rs V`]
+
+" Automatically turn on and off hilighting depending on entering or leaving
+" windows
+augroup CursorLine 
+   autocmd!
+   autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+   autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorcolumn
+   autocmd WinLeave * setlocal nocursorline
+   autocmd WinLeave * setlocal nocursorcolumn
+augroup END
+
+" NERDTree toggle
+nnoremap "" :NERDTreeTabsToggle<CR>
+
+" Normal mode mappings
+noremap J 5<down>
+noremap K 5<up>
+noremap H 5<left>
+noremap L 5<right>
+nnoremap <silent><leader>v :vsplit<cr>
+nnoremap <silent><leader>h :split<cr>
+noremap <C-l> :bnext<CR>
+noremap <C-h> :bprevious<CR>
+nnoremap <backspace> :tabnext<CR>
+
+nnoremap <leader>t :tabnew<space>
+nnoremap <leader>p :setlocal paste!<CR>
+nnoremap <leader>s :setlocal spell!<CR>
+nnoremap zz z=
+nnoremap <leader>mf :MultipleCursorsFind<space><c-r>=expand("<cword>")<cr>
+vnoremap <leader>mf :MultipleCursorsFind<space>
+
+" Quick replace
+
+nnoremap <leader>sub :%Subvert/<c-r>=expand("<cword>")<cr>//g<left><left>
+nnoremap ! :perldo s/(<c-r>=expand("<cword>")<cr>)//g<left><left>
+
+" Quickly insert line bellolw current line
+" nnoremap <c-o> o<esc>k
+" inoremap <c-o> <esc>o<esc>ki
+" Quickly insert line above current line
+" nnoremap <C-b> O<esc>j
+" inoremap <C-b> <esc>O<esc>ji
+
+" Simple script to toggle relative or abs line numbers
+function! NumberToggle()
+   if(&relativenumber == 1)
+      set norelativenumber
+      set number
+   else
+      set number
+      set relativenumber
+   endif
+   call NumberFix()
+endfunc
+
+nnoremap <leader># :call NumberToggle()<cr>
+
+function! NumberFix()
+   if(&buftype=='nofile' || &buftype=='quickfix' || &buftype =='help' )
+      set norelativenumber
+      set nonumber
+   endif
+endfunc
+
+" Automatically switch to abs line numbers when focus is lost
+augroup LineNumberCorrection
+   autocmd!
+   autocmd FocusGained,BufEnter,WinEnter,InsertLeave * set number | set relativenumber 
+   autocmd FocusLost,BufLeave,WinLeave,InsertEnter * set norelativenumber | set number 
+   autocmd FocusLost,FocusGained,BufLeave,BufEnter,WinEnter,WinLeave * call NumberFix()
+augroup END
+
+" Automatacally open bookmarks in NERDTree
+let g:NERDTreeShowBookmarkd=1
+
+" include my neobundles from another file
+source $HOME/.neobundlerc
+
+" Auto-Reload vimrc -- I have grown tired of the powerline / vim bug that this
+" triggers.  I am writing a new function to source this on demand
+augroup reload_vimrc " {
+   autocmd!
+   autocmd BufWritePost $MYVIMRC nested :source $MYVIMRC
+augroup END " }
+function! ReloadVimrc()
+   source $MYVIMRC
+endfunction
+
+" Pretty line wraps:
+set showbreak=↪
+nnoremap <leader>by :set showbreak=↪
+nnoremap <leader>bn :set noshowbreak=
+
+" Fix syntax hilighting on my .shellrc file
+" TODO: Use fim ft annotations to obviate this command
+augroup SyntaxFix
+   autocmd!
+   autocmd BufRead,BufNewFile .shellrc setfiletype sh
+   autocmd BufRead,BufNewFile .aliasrc setfiletype sh
+   autocmd BufRead,BufNewFile .vundlerc setfiletype vim
+augroup END
+
+" Rainbow parentheses config
+let g:rbpt_colorpairs = [
+    \ ['brown',       'RoyalBlue3'],
+    \ ['Darkblue',    'SeaGreen3'],
+    \ ['darkgray',    'DarkOrchid3'],
+    \ ['darkgreen',   'firebrick3'],
+    \ ['darkcyan',    'RoyalBlue3'],
+    \ ['darkred',     'SeaGreen3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['brown',       'firebrick3'],
+    \ ['gray',        'RoyalBlue3'],
+    \ ['black',       'SeaGreen3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['Darkblue',    'firebrick3'],
+    \ ['darkgreen',   'RoyalBlue3'],
+    \ ['darkcyan',    'SeaGreen3'],
+    \ ['red',         'firebrick3'],
+    \ ]
+
+let g:rbpt_max = 16
+let g:rpt_loadcmd_toggle = 0
+
+" Function to make a buffer a scratch buffer
+function! MakeScratch() 
+   setlocal buftype=nofile
+   setlocal bufhidden=hide
+   setlocal noswapfile
+   setlocal readonly
+   setlocal nomodifiable
+endfunction
+
+function! HistDiff()
+   %y
+   let my_view = winsaveview()
+   let my_ft = &filetype
+   let my_file = bufname("%")
+   tabnew
+   only
+   execute "buffer ".my_file
+   vnew
+   let i = 0
+   while buffer_exists("[earlier]:".i) != 0
+      let i = i + 1
+   endw
+   0put
+   execute "file [earlier]:".i
+   execute "setf " . my_ft
+   call MakeScratch()
+   call winrestview(my_view)
+   diffthis
+   wincmd l
+   diffthis
+   later 999999999999d
+   wincmd x
+   wincmd h
+   diffupdate
+   " call SetupDiff()
+endfunc
+
+nnoremap <silent><leader>hd :call HistDiff()<CR>
+
+" Turn off search hl
+noremap <silent> <leader>, :nohlsearch<cr>
+
+" Fix the "sudo" problem
+" cmap w!! w !sudo tee % >/dev/null
+
+" Open .vimrc
+nnoremap '1 :tabedit $HOME/.vimrc<cr>
+
+" Open .zshrc
+nnoremap '2 :tabedit $HOME/.zshrc<cr>
+
+" Open .ratpoisonrc
+nnoremap '3 :tabedit $HOME/.ratpoisonrc<cr>
+
+" Open .neobundlerc
+nnoremap '4 :tabedit $HOME/.neobundlerc<cr>
+
+" vim-session
+let g:session_default_overwrite = 1
+let g:session_autosave = 'yes'
+let g:session_autosave_periodic = 1
+let g:session_autoload = 'yes'
+
+" CtrlP configuration
+" let g:ctrlp_map = '<c-o>'
+" noremap <c-b> :CtrlPBuffer<CR>
+" noremap <c-y> :CtrlPMixed<CR>
+noremap '' :CtrlPMRU<CR>
+
+" Fugitive mappings:
+nnoremap <leader>gs :Gstatus<CR>
+nnoremap <leader>gl :!git log<CR>
+nnoremap <leader>gc :Gcommit<CR>
+nnoremap <leader>gd :Gvdiff<CR>
+nnoremap <leader>gt :!git lg<CR><CR>
+nnoremap <leader>gm :!git mergetool<CR>
+
+" Conventional shifting in visual mode
+vnoremap < <gv
+vnoremap > >gv
+
+" Tagbar
+nnoremap \|\| :TagbarToggle<CR>
+
+" Try to end the set paste dance
+inoremap <C-p> :set paste<CR>"+p:set paste!<CR>
+noremap <C-p> :set paste<CR>"+p:set paste!<CR>
+
+" Make searching more sane
+nnoremap : :OverCommandLine<CR>
+nnoremap / /\v
+nnoremap ? ?\v
+nnoremap <leader>] :%!perl -p -e "s///g"<left><left><left><left>
+vnoremap / /\v
+vnoremap ? ?\v
+vnoremap <leader>] :!perl -p -e "s///g"<left><left><left><left>
+nnoremap <leader>^ :%!perl -p -e "s///g"<left><left><left><left>
+" cnoremap %s %smagic/
+" cnoremap %p
+" TODO: Think about these commands and what they do
+" cnoremap \>s/ \>smagic/
+" nnoremap :g/ :g/\v
+" nnoremap :g// :g//
+
+" Syntastic
+let g:syntastic_aggregate_errors = 1
+let g:syntastic_cpp_checkers = ['cppcheck', 'gcc']
+
+" Yankstack configuration
+" let g:yankstack_yank_keys = ['y', 'd']
+" call yankstack#setup()
+" nnoremap <leader>Y :Yanks<CR>
+
+" Tbone configuration
+" nmap <leader>y :Tyank<CR>
+" map y y:Tyank 0<CR>
+" vmap y y:Tyank 0<CR>
+" map yy yy:Tyank<CR>
+
+" Automatically save and restore views:
+set viewoptions-=options
+let g:skipview_files = [ '[EXAMPLE PLUGIN BUFFER]' ]
+function! MakeViewCheck()
+    if has('quickfix') && &buftype =~ 'nofile'
+        " Buffer is marked as not a file
+        return 0
+    endif
+    if empty(glob(expand('%:p')))
+        " File does not exist on disk
+        return 0
+    endif
+    if len($TEMP) && expand('%:p:h') == $TEMP
+        " We're in a temp dir
+        return 0
+    endif
+    if len($TMP) && expand('%:p:h') == $TMP
+        " Also in temp dir
+        return 0
+    endif
+    if index(g:skipview_files, expand('%')) >= 0
+        " File is in skip list
+        return 0
+    endif
+    return 1
+endfunction
+
+" Autosave & Load Views.
+augroup VimrcAutoView
+    autocmd!
+    autocmd BufWritePost,BufLeave,WinLeave ?* if MakeViewCheck() | mkview | endif
+    autocmd BufWinEnter ?* if MakeViewCheck() | silent loadview | endif
+augroup END
+
+" Ultisnips configuration
+set runtimepath+=~/.vim/bundle/ultisnips/
+let g:UltiSnipsExpandTrigger="<c-f>"
+let g:UltiSnipsJumpForwardTrigger="<c-j>"
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+let g:UltiSnipsEditSplit="vertical"
+
+" This is taken directly from the vim wiki
+function! s:RunShellCommand(cmdline)
+  echo a:cmdline
+  let expanded_cmdline = a:cmdline
+  for part in split(a:cmdline, ' ')
+     if part[0] =~ '\v[%#<]'
+        let expanded_part = fnameescape(expand(part))
+        let expanded_cmdline = substitute(expanded_cmdline, part, expanded_part, '')
+     endif
+  endfor
+  botright new
+  setlocal buftype=nofile bufhidden=wipe nobuflisted noswapfile nowrap
+  call setline(1, 'You entered:    ' . a:cmdline)
+  call setline(2, 'Expanded Form:  ' .expanded_cmdline)
+  call setline(3,substitute(getline(2),'.','=','g'))
+  execute '$read !'. expanded_cmdline
+  setlocal nomodifiable
+endfunction
+
+command! -complete=shellcmd -nargs=+ Shell call s:RunShellCommand(<q-args>)
+
+
+" Tell vim to execute the current line (will not modify the current line unless
+" you are messing with the w register in that line)
+" TODO: Fix reg clobber
+nnoremap <leader>ex yy:<C-r>"<backspace><CR>ddP<down>
+" Execute current selection in various languages
+vnoremap <silent><leader>ez :!zsh<CR>
+vnoremap <silent><leader>eb :!bash<CR>
+vnoremap <silent><leader>ep :!python<CR>
+" Execute current buffer
+nnoremap <silent><leader><leader>X :w<CR>:silent !chmod +x %:p<CR>:silent !%:p 2>&1 \| tee /tmp/output<CR>:rightbelow split /tmp/output<CR>:redraw!<CR>
+
+" Scratch Pad
+let g:scratchPadDropTo = "in"
+let g:scratchpadTmpDir = "/tmp/" 
+nnoremap <leader>sp :call scratchpad#Open(&filetype)<cr>
+nnoremap <leader>spc :call scratchpad#Open("")<left><left>
+
+" Make the size of minimized splits 0
+set winminheight=0
+
+" vim dispatch (thank you Tim!)
+let g:dispatch_called = 0
+
+function! IntelliDispatch()
+   if g:dispatch_called == 0
+      let g:dispatch_called = 1
+   endif
+   Dispatch\!
+endfunction
+
+nnoremap <silent><leader>m :Make<CR>
+
+" Simple function to toggle the python output in a split at
+" the bottom
+function! RunToggle() 
+   let l:winnr = bufwinnr('__DISPATCH_RESULTS__')
+   let l:currentwindow = winnr()
+   if l:winnr >= 0 
+      execute l:winnr . "wincmd w"
+      close
+      execute l:currentwindow . "wincmd w"
+   else
+      if g:dispatch_called == 1
+         Copen
+         file __DISPATCH_RESULTS__
+      else
+         echo "Dispatch not called"
+      endif
+   endif
+endfunction
+
+nnoremap <silent><leader>d :call IntelliDispatch()<CR>
+" nnoremap <silent><F3> :Copen<CR>:file __DISPATCH_RESULTS__<CR>
+nnoremap <silent><F3> :call RunToggle()<CR>
+augroup CleanDispatch
+   autocmd!
+   autocmd BufLeave __DISPATCH_RESULTS__ set bufhidden=delete
+augroup END
+
+" vim commentary 
+" nnoremap <F8> :Commentary<CR>
+" vnoremap <F8> :Commentary<CR>
+" inoremap <F8> <ESC>:Commentary<CR>
+" nnoremap <leader><space> :Commentary<CR>
+" vnoremap <leader><space> :Commentary<CR>
+" inoremap <leader><space> <ESC>:Commentary<CR>i
+
+" vim commentary 
+nnoremap <F8> :TComment<CR>
+vnoremap <F8> :TComment<CR>
+inoremap <F8> <ESC>:TComment<CR>
+nnoremap <leader><space> :TComment<CR>
+vnoremap <leader><space> :TComment<CR>
+inoremap <leader><space> <ESC>:TComment<CR>i
+
+" vim calendar
+" let g:calendar_google_calendar = 1
+" let g:calendar_google_task = 1
+" nnoremap <silent><leader>cal :Calendar<CR>
+
+" set t_Co=256
+
+" Undo tree
+nnoremap <leader>u :UndotreeToggle<CR>
+set undofile
+set undodir=$HOME/.vim/undo/
+set undolevels=100
+set undoreload=100
+let g:undotree_WindowLayout = 3
+let g:undotree_SplitWidth = 45
+let g:undotree_DiffpanelHeight = 12
+let g:undotree_SetFocusWhenToggle = 1
+let g:undotree_TreeNodeShape = '◈'
+let g:undotree_DiffAutoOpen = 1
+
+" Buffer count:
+function! NrBufs()
+    let i = bufnr('$')
+    let j = 0
+    while i >= 1
+        if buflisted(i)
+            let j+=1
+        endif
+        let i-=1
+    endwhile
+    return j
+endfunction
+
+" Tab count:
+function! NrTabs()
+    return tabpagenr('$')
+endfunction
+set showtabline=0
+
+" Smart tab/buffer line
+" This makes sure I can see the correct tabbar in powerline
+function! SmartTabLine()
+   let l:buffer_count = NrBufs()
+   let l:tab_count = NrTabs()
+   if l:buffer_count > 1
+      set showtabline=2
+   else
+      set showtabline=1
+   endif
+   let &tabline=pyeval('powerline.tabline()')
+endfunction
+
+augroup TabLine
+   autocmd!
+   autocmd BufEnter,BufWrite,BufLeave * call SmartTabLine()
+augroup END
+
+ command! DiffOrig vert new | set bt=nofile | r ++edit # | 0d_
+   \ | diffthis | wincmd p | diffthis | diffupdate
+
+" Vim blockit
+let g:blockit_H_char = '-'
+let g:blockit_V_char = '|'
+let g:blockit_margin = 1
+let g:blockit_align = 'l'
+vnoremap <leader>b :Block<CR>
+
+" augroup Tmux
+"    autocmd!
+"    autocmd BufReadPost,FileReadPost,BufNewFile,BufEnter * let &titlestring = ' ' . expand("%:t")
+" augroup END
+
+" Pyclewn
+function! Debug(target)
+   let l:delay = "20m"
+   if !has("netbeans_enabled")
+      Pyclewn
+   endif
+   exec "sleep ".l:delay
+   exec "C file ".a:target
+   exec "sleep ".l:delay
+   C shell setsid roxterm -e inferior_tty.py &
+   exec "sleep ".l:delay
+   C set environment TERM = screen-256color
+   exec "sleep ".l:delay
+   Cmapkeys
+   call MakeScratch()
+endfunction
+
+" Nextval
+" Note: can't use nnoremap here
+" This breaks the jumplist!
+" nmap <silent> <C-i> <Plug>nextvalInc
+" nmap <silent> <C-d> <Plug>nextvalDec
+
+if has('gui_running')
+   set guifont=Droid\ Sans\ Mono\ for\ Powerline\ 18
+   " use console dialogs instead of popup
+   " dialogs for simple choices
+   set guioptions+=c
+   set guioptions-=M
+   set guioptions-=m
+   set guioptions-=T
+   set guioptions-=e
+   set guioptions-=r
+   set guioptions-=l
+   set guioptions-=L
+endif
+
+"Extradite config
+nnoremap <silent><leader>x :silent Extradite<CR>
+
+"Geeknote config
+nnoremap <silent><leader>g :silent Geeknote<CR><C-w>o
+
+"Gitv config
+nnoremap <silent><leader>V :Gitv<CR>
+let g:Gitv_OpenHorizontal = 1
+
+" Surround blocks
+" Draw () around visually selected phrase
+" vnoremap <leader>( meomsv`ea)<Esc>`si(<Esc>%
+" " Draw [] around visually selected phrase
+" vnoremap <leader>[ meomsv`ea]<Esc>`si[<Esc>%
+" " Draw <> around visually selected phrase
+" vnoremap <leader>< meomsv`ea><Esc>`si<<Esc>%
+" " Draw {} around visually selected phrase
+" vnoremap <leader>{ meomsv`ea}<Esc>`si{<Esc>%
+" " Draw " " around visually selected phrase
+" vnoremap <leader>" meomsv`ea"<Esc>`si"<Esc>`e2l
+" " Draw ' ' around visually selected phrase
+" vnoremap <leader>' meomsv`ea'<Esc>`si'<Esc>`e2l
+" " Draw /* */ around visually selected phrase
+" vnoremap <leader><BS> meomsv`ea */<Esc>`si/* <Esc>`e4l
+
+" let g:powerline_config_overrides={'common': {'reload_config': 0}}
+
+" Glowshift config
+let g:glowshi_ft_no_default_key_mappings = 1
+nmap f <plug>(glowshi-ft-f)
+nmap F <plug>(glowshi-ft-F)
+nmap t <plug>(glowshi-ft-t)
+nmap T <plug>(glowshi-ft-T)
+nmap ; <plug>(glowshi-ft-repeat)
+vmap f <plug>(glowshi-ft-f)
+vmap F <plug>(glowshi-ft-F)
+vmap t <plug>(glowshi-ft-t)
+vmap T <plug>(glowshi-ft-T)
+vmap ; <plug>(glowshi-ft-repeat)
+
+nnoremap <space> za
+
+" " Airline configuration
+" let g:airline_powerline_fonts = 1
+" let g:airline#extensions#tabline#enabled = 1
+
+" Git gutter configuration
+let g:gitgutter_sign_added = '✚'
+let g:gitgutter_sign_modified = ''
+let g:gitgutter_sign_removed = '↩'
+let g:gitgutter_sign_removed_first_line = '▲'
+let g:gitgutter_sign_modified_removed = '⚑'
+
+nnoremap <C-x> q:i
+
+" skeletons
+let g:skeletons_autoregister = 1
+let g:skeletons_dir = "/home/dnoland/.vim/skeletons/"
+
+" Thanks tim
+if !empty($SUDO_USER) && $USER !=# $SUDO_USER
+   set viminfo=
+   set directory-=~/tmp
+   set backupdir-=~/tmp
+   set noundofile
+   set undodir=
+   set backupskip+=*
+endif
+
+" Found this in Tim Pope's .vimrc.  This is a really good idea!
+" Can colapse git trees and use it properly!
+if filereadable(expand("~/.vimrc.local"))
+  source ~/.vimrc.local
+endif
+
+" Accumulating register
+" use qaq to clear
+vmap 1 "Ay
+vmap <c-1> "Ay
+nmap <c-1> "Ayy
+nnoremap 1 "ap
+vmap 2 "By
+vmap <c-2> "By
+nmap <c-2> "Byy
+nnoremap  "bp
+vmap 3 "Cy
+vmap <c-3> "Cy
+nmap <c-3> "Cyy
+nnoremap 3 "cp
+
+" Global commands
+" cnoremap g/ g/\v
+" cnoremap v/ v/\v
+" cnoremap g!/ v/\v
+
+" Emmet config
+" let g:user_emmet_install_global = 0
+" autocmd FileType html,css EmmetInstall
+" let g:user_emmet_leader_key='<leader><c-e>'
+
+" Over config
+let g:over_enable_auto_nohlsearch = 1
+let g:over_enable_cmd_window = 1
+let g:over_command_line_prompt = " CMD  "
+" let g:over#command_line#search#enable_incsearch = 1
+" let g:over#command_line#search#enable_move_cursor = 1
+
+" Open browser config
+nmap <leader>s <Plug>(openbrowser-smart-search)
+vmap <leader>s <Plug>(openbrowser-smart-search)
+nnoremap <leader>S :OpenBrowserSmartSearch ""<left>
+

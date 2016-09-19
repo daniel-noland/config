@@ -1,0 +1,230 @@
+set encoding=utf-8
+set termencoding=utf-8
+let mapleader = '\'
+
+colorscheme dan_custom
+"basic settings....
+set bg=dark
+syntax on
+set autoindent
+"Turn on relative line numbers
+set relativenumber
+set foldmethod=syntax
+set foldcolumn=1
+set foldlevel=4
+set foldminlines=2
+"improves regular expressions
+set magic
+set noautowrite
+set noerrorbells
+set showmatch
+"set wrapscan
+"set wrapmargin=4
+set expandtab
+set smarttab
+set smartindent
+set tabstop=3
+set shiftwidth=3
+set hlsearch
+set incsearch
+set history=1000
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Misc
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Remove the Windows ^M - when the encodings get messed up
+noremap <Leader>fenc mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
+
+"runtime macros/matchit.vim
+set wildmenu
+set wildmode=list:longest
+set ignorecase
+set smartcase
+set title
+set scrolloff=5
+set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
+set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
+set backspace=indent,eol,start
+set shortmess=atI
+
+" current directory is always matching the
+" content of the active window
+set autochdir
+
+" remember some stuff after quiting vim:
+" marks, registers, searches, buffer list
+set viminfo='20,<50,s10,h,%
+" Return to last edit position when opening files (You want this!)
+autocmd BufReadPost *
+     \ if line("'\"") > 0 && line("'\"") <= line("$") |
+     \   exe "normal! g`\"" |
+     \ endif
+func! DeleteTrailingWS()
+  exe "normal mz"
+  %s/\s\+$//ge
+  exe "normal `z"
+endfunc
+autocmd BufWrite *.py :call DeleteTrailingWS()
+autocmd BufWrite *.java :call DeleteTrailingWS()
+autocmd BufWrite *.c :call DeleteTrailingWS()
+autocmd BufWrite *.cpp :call DeleteTrailingWS()
+autocmd BufWrite *.cxx :call DeleteTrailingWS()
+autocmd BufWrite *.h :call DeleteTrailingWS()
+autocmd BufWrite *.hh :call DeleteTrailingWS()
+autocmd BufWrite *.hpp :call DeleteTrailingWS()
+autocmd BufWrite *.sh :call DeleteTrailingWS()
+autocmd BufWrite *.bash :call DeleteTrailingWS()
+autocmd BufWrite *.html :call DeleteTrailingWS()
+autocmd BufWrite *.shtml :call DeleteTrailingWS()
+autocmd BufWrite *.js :call DeleteTrailingWS()
+autocmd BufWrite *.latex :call DeleteTrailingWS()
+autocmd BufWrite *.tex :call DeleteTrailingWS()
+
+command! VimGrepWordCurrentFile :execute 'vimgrep /'.expand('<cword>').'/gj '.expand('%') | copen
+map gr :VimGrepWordCurrentFile<CR>
+map <leader>Gr :execute "vimgrep /" . expand("<cword>") . "/j **" <Bar> cw<CR>
+
+"Select word under cursor
+vnoremap ` iw
+
+"Search and replace selected text
+vnoremap <silent> <leader>r :call VisualSelection('replace')<CR>
+
+"NERDTree toggle
+map '' :NERDTreeToggle<CR>
+"Vifm plugin
+map <leader>vv  :TabVifm<CR>
+" use console dialogs instead of popup
+" dialogs for simple choices
+set guioptions+=c
+
+"for rare ocasation that I need to use the GUI, disable the cruft
+"set guioptions-=m
+set guioptions-=T
+set guioptions-=r
+
+"Disable hilight command
+map <silent><leader>/ :nohlsearch<CR>
+
+"Command mode mappings
+map J 5j
+map K 5k
+map H 5h
+map L 5l
+map M %
+map <leader>e :edit .<CR>
+map <leader>w :w<CR>
+map <F12> :w<CR>
+map <leader>q :q<CR>
+map <leader>Q :qall<CR>
+map <c-h> :tabprevious<CR>
+map <c-l> :tabnext<CR>
+map <leader>t :tabnew
+map <leader><Space> :tabnew .<CR>
+map <leader>p :setlocal paste!<CR>
+set pastetoggle=<F10>
+map <leader>s :setlocal spell!<CR>
+map ]] ]s
+map [[ [s
+map zz z=
+map <leader>mf :MultipleCursorsFind
+map <leader>sh :split<CR>
+map <leader>sv :vsplit<CR>
+"This maps <M-key> to <C-w>key
+"I would use the key notation but it does not work.  I think it is my
+"terminal's fault.
+"map  <c-w>h
+"map  <c-w>l
+"map  <c-w>j
+"map  <c-w>h
+"imap  <c-w>l
+"imap  <c-w>j
+"imap  ()<++><esc>F(a
+imap  []<++><esc>F[a
+imap  {}<++><esc>F{a
+imap  {<cr><cr>}<++><up>
+imap  <><++><esc>F<;a
+imap ++><esc>F"i
+imap ++><esc>F'i
+imap  {<cr><cr>}<++><up>
+
+"Quick replace
+map  :%Subvert/<c-r>=expand("<cword>")<cr>
+map  :perldo s/(<c-r>=expand("<cword>")<cr>)
+"Tell vim to execute the current line (will not modify the current line unless
+"you are messing with the w register in that line)
+map <leader>ex yy:<C-r>"<backspace><CR>ddP<down>
+
+"Work around the alt key BUG (yes it is a bug, just a legacy 'feature' bug)
+let c='a'
+while c <= 'z'
+exec "set <A-".c.">=\e".c
+exec "imap \e".c." <A-".c.">"
+let c = nr2char(1+char2nr(c))
+endw
+
+"Quickly insert line bellolw current line
+map <leader>o o<esc><up>
+"map <C-down> o<esc><up>
+map  o<esc><up>
+"Quickly insert line above current line
+map  O<esc><down>sc><down>
+"map <C-up> O<esc><down>
+
+"Simple script to toggle relative or abs line numbers
+function! NumberToggle()
+if(&relativenumber == 1)
+ set norelativenumber
+ set number
+else
+ set number
+ set relativenumber
+endif
+endfunc
+nnoremap <leader># :call NumberToggle()<cr>
+
+"Automatically switch to abs line numbers when focus is lost
+au FocusLost * :set norelativenumber
+au FocusGained * :set relativenumber
+autocmd InsertEnter * :set norelativenumber | :set number
+autocmd InsertLeave * :set relativenumber
+
+"Automatacally open bookmarks in NERDTree
+let NERDTreeShowBookmarks=1
+
+"ConqueShell
+"Can't really use zsh due to powerline being REALLY incompatible with Conque
+nnoremap <silent> <leader>ct :ConqueTermTab bash
+
+"Get gundo working on my box
+let g:gundo_prefer_python3=1
+let g:gundo_close_on_revert=1
+let g:gundo_width=45
+let g:gundo_right=1
+let g:gundo_preview_height=25
+let g:gundo_preview_bottom=1
+let g:gundo_close_on_revert=1
+nnoremap "" :GundoToggle<CR>
+
+source $HOME/.vundlerc
+
+"Vimgitlog
+let g:GITLOG_default_mode = 2
+nnoremap <silent> <leader>t :call GITLOG_ToggleWindows()<cr>
+nnoremap <silent> <leader>ft :call GITLOG_FlipWindows()<cr>
+
+" Auto-Reload vimrc
+augroup reload_vimrc " {
+autocmd!
+autocmd BufWritePost $MYVIMRC source $MYVIMRC
+augroup END " }
+
+" Pretty line wraps:
+set showbreak=↪
+nnoremap <leader>by :set set showbreak=↪
+nnoremap <leader>bn :set set noshowbreak=
+
+set undofile
+set undodir=$HOME/.vimundo/
+
+au BufRead,BufNewFile .shellrc setfiletype sh

@@ -1,0 +1,24 @@
+startup_message off
+silencewait 15
+activity "activity in %n (%t)"
+vbell_msg " *beep* "
+autodetach on
+termcapinfo xterm 'bc@:bs@'
+bind ' ' windowlist -b
+bind f select
+bind q only
+bind s split
+bind x remove
+bind v copy
+bind P paste
+bind D displays
+bind ; fit
+bind j focus
+bind C screen -t "finch" finch
+bind w screen -t "work" bash
+#screen -t "rtorrent" rtorrent
+#screen -t "cmus" cmus
+#screen -t "finch" finch
+screen -t "work" bash
+hardstatus alwayslastline
+hardstatus string '%{= kG}[ %{G}%H %{g}][%= %{=kw}%?%-Lw%?%{r}(%{W}%n*%f%t%?(%u)%?%{r})%{w}%?%+Lw%?%?%= %{g}][%{g}%Y.%m.%d %{W}%c %{g}]'

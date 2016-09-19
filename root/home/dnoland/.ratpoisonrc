@@ -1,0 +1,89 @@
+#Set up workspaces
+#exec rpws -i
+#exec /usr/bin/rpws init 2 -k
+grename primary
+gnewbg secondary
+#set up wallpaper
+exec xcompmgr -c -f -D 5 &
+exec nitrogen --restore &
+
+startup_message off
+set winname class
+defborder 0
+defpadding 0 0 0 0 defbarpadding 0 0
+exec xsetroot -solid black -cursor_name left_ptr
+exec xserroot -cursor_name left_ptr
+exec unclutter -idle 1 -jitter 2 -root
+bind semicolon colon
+bind colon exec
+#vim style keybindings for focus changing
+definekey top C-M-l focusright
+definekey top C-M-h focusleft
+definekey top C-M-j focusdown
+definekey top C-M-k focusup
+definekey top C-M-L exchangeright
+definekey top C-M-H exchangeleft
+definekey top C-M-J exchangedown
+definekey top C-M-K exchangeup
+definekey top M-L prevscreen
+definekey top M-H nextscreen
+definekey top M-K prev
+definekey top M-J next
+#Makes alt-tab work as expected... and binds similar functionality to other keys
+definekey top C-M-n next
+definekey top C-M-p prev
+definekey top C-M-N cnext
+definekey top C-M-P cprev
+definekey top M-Tab next
+definekey top M-ISO_Left_Tab prev
+definekey top M-C-Q only
+definekey top Print exec scrot -s
+definekey top M-period exec mpc next
+definekey top M-comma exec mpc prev
+#bind keys for my workspaces script
+bind comma exec ratSpaces.sh dec
+bind period exec ratSpaces.sh inc
+bind greater exec ratSpaces.sh sendn
+bind less exec ratSpaces.sh sendp
+bind backslash exec ratSpaces.sh swap
+bind C-period exec ratSpaces.sh follown
+bind C-comma exec ratSpaces.sh followp
+
+#bind c exec roxterm --title=primary -e screen -xRR -S primary
+bind c exec roxterm -e ~/.bin/tmuxPrimary.sh
+bind C exec roxterm -e ~/.bin/tmuxSecondary.sh
+bind m exec SSH_AUTH_SOCK=~/.gnupg/S.gpg-agent.ssh roxterm -e 'ssh -t mike.dnoland.com "~/.bin/tmuxPrimary.sh"'
+bind M exec SSH_AUTH_SOCK=~/.gnupg/S.gpg-agent.ssh roxterm -e 'ssh -t mike.dnoland.com "~/.bin/tmuxSecondary.sh"'
+bind f exec google-chrome-beta
+#bind f exec chromium
+#bind F exec firefox
+bind q only
+bind o only
+bind N cnext
+bind P cprev
+bind x exec xournal
+bind w exec ratSpaces.sh scan
+bind F12 exec sudo systemctl suspend
+bind S-C-M-F12 exec sudo systemctl suspend
+definekey top S-C-M-F12 exec sudo systemctl suspend
+#bind ] exec mumble mumble://dnoland@mike/?version=1.2.0
+#bind m exec mumble
+#bind m exec mathematica
+bind B exec ratpoison -c "echo $(acpi)"
+bind e exec thunderbird
+
+#Fix stupid java windows by tricking them into thinking they are using a more popular system
+exec wmname compiz
+#Open some programs I always use on monitors / workspaces where I want.
+#exec trayer --edge left --SetPartialStrut true
+exec trayer
+#set padding 0 0 0 26
+exec ratLaunch.sh
+exec export SSH_AUTH_SOCK=~/.gnupg/S.gpg-agent.ssh
+#exec xsetwacom set "Wacom Bamboo Connect Pen stylus" MapToOutput HEAD-2
+exec echo UPDATESTARTUPTTY | gpg-connect-agent
+# exec eclimd
+exec sleep 1
+#unmanage trayer
+unmanage panel
+#set padding 26 0 0 0 
