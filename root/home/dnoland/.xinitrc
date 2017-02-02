@@ -48,15 +48,14 @@ fi
 export GPG_AGENT_INFO
 export SSH_AUTH_SOCK
 
+
+# eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets)
 setxkbmap -option ctrl:nocaps && log "setxkbmap called"
 powerline-daemon
-start xscreensaver
-( ( sleep 10 && /usr/bin/xscreensaver -no-splash -display :0.0 ) & )
+# start xscreensaver
+# ( ( sleep 10 && /usr/bin/xscreensaver -no-splash -display :0.0 ) & )
 xautolock -time 100 -locker "systemctl suspend" -detectsleep &
-xss-lock -- xscreensaver-command -lock &
+#xss-lock -- xscreensaver-command -lock &
+# xss-lock -- i3lock &
+xbindkeys
 exec i3
-# exec startxfce4
-# exec ratpoison
-# exec startfluxbox
-# exec awesome
-# log ".xinitrc finished"

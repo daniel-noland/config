@@ -50,6 +50,7 @@ bindsym $mod+c exec clipmenu
 
 # lookup a password (password manager)
 bindsym $mod+g exec passmenu -p "pass:" -l 5 -fn 'Droid Sans Mono-20'
+bindsym $mod+Next exec nmcli_dmenu
 
 # quickswitch
 # bindsym $mod+space exec --no-startup-id quickswitch.py
@@ -90,10 +91,10 @@ bindsym $mod+t floating toggle
 bindsym $mod+Mod1+space focus mode_toggle
 
 # focus the parent container
-# bindsym $mod+up focus parent
+bindsym $mod+shift+space focus parent
 
 # focus the child container
-# bindsym $mod+down focus child
+bindsym $mod+space focus child
 
 
 # switch to workspace
@@ -160,6 +161,14 @@ bindsym $mod+Shift+N move workspace to output right
 bindsym $mod+p workspace prev_on_output
 bindsym $mod+Shift+P move workspace to output left
 
+
+bindsym XF86AudioRaiseVolume exec pamixer --increase 5
+bindsym XF86AudioLowerVolume exec pamixer --decrease 5
+bindsym XF86MonBrightnessUp exec xbacklight -inc 5
+bindsym XF86MonBrightnessDown exec xbacklight -dec 5
+bindsym $mod+Mod1+up exec xbacklight -inc 5
+bindsym $mod+Mod1+down exec xbacklight -dec 5
+
 assign [class="^Vimperator.*$"] 1:browse
 assign [class="^Terminator$"] 2:term
 assign [class="^Skype$"] 3:com
@@ -173,10 +182,17 @@ assign [class="^Thunderbird$"] 3:com
 
 for_window [class="^.*"] border pixel 0
 
+#exec xss-lock -- xscreensaver-command --lock
+# exec xss-lock -- i3lock &
+# exec connman-gtk
+# exec blueberry-tray
+#exec sudo chown dnoland /sys/class/backlight/intel_backlight/brightness && calise --auto
+exec nm-applet
+exec xmodmap ~/.Xmodmap
 exec /usr/bin/clipmenud
 exec /usr/bin/run_keybase 
 # exec /usr/bin/firejail --seccomp /usr/bin/firefox
 # exec /usr/bin/firejail --seccomp /usr/bin/thunderbird
-exec /usr/bin/firejail --name=browser --shell=none --dns=8.8.4.4 --dns=8.8.8.8 /usr/bin/chromium
+exec /usr/bin/firejail --name=browser --shell=none /usr/bin/chromium
 exec /usr/bin/terminator
 exec /usr/bin/terminator -x tmux -c firejail --seccomp hangups

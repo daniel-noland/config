@@ -31,7 +31,7 @@ if [[ -x $(whence -c powerline) ]]; then
    # powerline-daemon --quiet
    # POWERLINE_COMMAND=powerline-client
    export LANG="en_US.UTF-8"
-   source /usr/lib/python3.5/site-packages/powerline/bindings/zsh/powerline.zsh
+   source /usr/lib/python3.6/site-packages/powerline/bindings/zsh/powerline.zsh
    # source /usr/share/zsh/site-contrib/powerline.zsh
 else
    setopt prompt_subst
@@ -420,14 +420,14 @@ bindkey "^R" history-incremental-search-backward
 
 export WORKON_HOME="$HOME/virtualenvs"
 export PYTHON_PATH="."
-source $(which virtualenvwrapper.sh)
+#source $(which virtualenvwrapper.sh)
 
-if [[ -z "$TMUX" ]] ;then
-    ID="`tmux ls | grep -vm1 attached | cut -d: -f1`" # get the id of a deattached session
-    if [[ -z "$ID" ]] ;then # if not available create a new one
-        tmux new-session
-    else
-        tmux attach-session -t "$ID" # if available attach to it
-    fi
-    exit
-fi
+#if [[ -z "$TMUX" ]] ;then
+#    ID="`tmux ls | grep -vm1 attached | cut -d: -f1`" # get the id of a deattached session
+#    if [[ -z "$ID" ]] ;then # if not available create a new one
+#        tmux new-session
+#    else
+#        tmux attach-session -t "$ID" # if available attach to it
+#    fi
+#    exit
+#fi

@@ -192,7 +192,7 @@ augroup END
 let g:NERDTreeShowBookmarkd=1
 
 " include my neobundles from another file
-source $HOME/.neobundlerc
+" source $HOME/.neobundlerc
 
 " Pretty line wraps:
 set showbreak=↪
@@ -543,7 +543,7 @@ endfunction
 "    set &ft=sh
 " endfunction
 
-nnoremap <leader>t :call Terminal()<CR>
+" nnoremap <leader>t :call Terminal()<CR>
 
 augroup AutoTerminal
    autocmd!
@@ -561,3 +561,80 @@ inoremap <silent> <A-j> <esc>:TmuxNavigateDown<CR>
 inoremap <silent> <A-k> <esc>:TmuxNavigateUp<CR>
 inoremap <silent> <A-l> <esc>:TmuxNavigateRight<CR>
 nnoremap <silent> <A-b> <esc>:TmuxNavigatePrevious<CR>
+
+
+call plug#begin('~/.vim/plugged')
+" Plug 'WolfgangMehner/vim-plugins'
+Plug 'kien/rainbow_parentheses.vim'
+Plug 'majutsushi/tagbar'
+Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/syntastic'
+" Plug 'terryma/vim-multiple-cursors'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-jdaddy'
+Plug 'tpope/vim-repeat'
+" Plug 'tpope/vim-dispatch'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'xolox/vim-misc'
+Plug 'rstacruz/sparkup'
+Plug 'tobyS/skeletons.vim'
+Plug 'ervandew/supertab'
+Plug 'mbbill/undotree'
+Plug 'airblade/vim-gitgutter'
+Plug 'saihoooooooo/glowshi-ft.vim'
+Plug 'Chiel92/vim-autoformat'
+Plug 'rodjek/vim-puppet'
+Plug 'Shougo/vimproc.vim'
+Plug 'kshenoy/vim-signature'
+Plug 'michaeljsmith/vim-indent-object'
+Plug 'gregsexton/MatchTag'
+Plug 'osyo-manga/vim-over'
+Plug 'tomtom/tcomment_vim'
+Plug 'jistr/vim-nerdtree-tabs'
+Plug 'mxw/vim-jsx'
+Plug 'leafgarland/typescript-vim'
+Plug 'Quramy/tsuquyomi'
+Plug 'pangloss/vim-javascript'
+Plug 'itchyny/lightline.vim'
+Plug 'drmikehenry/vim-extline'
+Plug 'Shougo/deoplete.nvim'
+Plug 'Floobits/floobits-neovim'
+Plug 'critiqjo/lldb.nvim'
+Plug 'jalvesaq/vimcmdline'
+Plug 'christoomey/vim-tmux-navigator'
+" Plug 'SirVer/ultisnips'
+" Plug 'honza/vim-snippets'
+"
+Plug 'MattesGroeger/vim-bookmarks'
+Plug 'fntlnz/atags.vim'
+call plug#end()
+
+"Prevent bookmarks from fighting nerdtree
+let g:bookmark_no_default_key_mappings = 1
+function! BookmarkMapKeys()
+    nmap mm :BookmarkToggle<CR>
+    nmap mi :BookmarkAnnotate<CR>
+    nmap mn :BookmarkNext<CR>
+    nmap mp :BookmarkPrev<CR>
+    nmap ma :BookmarkShowAll<CR>
+    nmap mc :BookmarkClear<CR>
+    nmap mx :BookmarkClearAll<CR>
+    nmap mkk :BookmarkMoveUp
+    nmap mjj :BookmarkMoveDown
+endfunction
+function! BookmarkUnmapKeys()
+    unmap mm
+    unmap mi
+    unmap mn
+    unmap mp
+    unmap ma
+    unmap mc
+    unmap mx
+    unmap mkk
+    unmap mjj
+endfunction
+autocmd BufEnter * :call BookmarkMapKeys()
+autocmd BufEnter NERD_tree_* :call BookmarkUnmapKeys()
+
+" autocmd BufWritePost * call atags#generate() 

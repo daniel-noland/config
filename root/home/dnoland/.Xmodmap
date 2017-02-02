@@ -1,6 +1,10 @@
 clear lock
-clear Control
+clear control
+! 110 = Home
+keycode 110 = Control_L
+! 115 = End
+keycode 115 = Escape
 keycode 66 = Control_L
 keycode 37 = Control_L
 keycode 109 = Control_R
-add Control = Control_L Control_R
+add control = Home Control_L Control_R
