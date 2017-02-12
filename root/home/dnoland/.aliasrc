@@ -39,6 +39,8 @@ fi
 # This adds a paste bin command
 alias pbin="curl -F 'sprunge=<-' http://sprunge.us"
 
+alias slack="slackcat --tee -c "
+
 #alias im="pipe2pidgin --user daniel.noland"
 
 [[ -x $(which vimcat) ]] && alias vimcat='vimcat -c "set noloadplugins" -u ~/.config/nvim/init.vim'
