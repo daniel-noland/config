@@ -164,8 +164,9 @@ bindsym $mod+Shift+P move workspace to output left
 
 bindsym XF86AudioRaiseVolume exec pamixer --increase 5
 bindsym XF86AudioLowerVolume exec pamixer --decrease 5
-bindsym XF86MonBrightnessUp exec xbacklight -inc 5
-bindsym XF86MonBrightnessDown exec xbacklight -dec 5
+
+bindsym XF86Explorer exec physlock
+
 bindsym $mod+Mod1+up exec xbacklight -inc 5
 bindsym $mod+Mod1+down exec xbacklight -dec 5
 
