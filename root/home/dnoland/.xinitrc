@@ -40,20 +40,23 @@ if [ -f "$usermodmap" ]; then
     xmodmap "$usermodmap" && log "$usermodmap loaded" 
 fi
 
-if test -f $XDG_RUNTIME_DIR/gpg-agent-info && kill -0 $(head -n 1 $XDG_RUNTIME_DIR/gpg-agent-info | cut -d: -f2) 2>/dev/null ; then
-    eval $(< $XDG_RUNTIME_DIR/gpg-agent-info)
-else
-    eval $(gpg-agent --daemon --enable-ssh-support --write-env-file $XDG_RUNTIME_DIR/gpg-agent-info)
-fi
-export GPG_AGENT_INFO
-export SSH_AUTH_SOCK
+[ -f /etc/xprofile ] && . /etc/xprofile
+[ -f ~/.xprofile ] && . ~/.xprofile
 
-setxkbmap -option ctrl:nocaps && log "setxkbmap called"
-powerline-daemon
-start xscreensaver
-( ( sleep 10 && /usr/bin/xscreensaver -no-splash -display :0.0 ) & )
-xautolock -time 100 -locker "systemctl suspend" -detectsleep &
-xss-lock -- xscreensaver-command -lock &
+#if test -f $XDG_RUNTIME_DIR/gpg-agent-info && kill -0 $(head -n 1 $XDG_RUNTIME_DIR/gpg-agent-info | cut -d: -f2) 2>/dev/null ; then
+#    eval $(< $XDG_RUNTIME_DIR/gpg-agent-info)
+#else
+#    eval $(gpg-agent --daemon --enable-ssh-support --write-env-file $XDG_RUNTIME_DIR/gpg-agent-info)
+#fi
+#export GPG_AGENT_INFO
+#export SSH_AUTH_SOCK
+
+#setxkbmap -option ctrl:nocaps && log "setxkbmap called"
+#powerline-daemon
+#start xscreensaver
+#( ( sleep 10 && /usr/bin/xscreensaver -no-splash -display :0.0 ) & )
+#xautolock -time 100 -locker "systemctl suspend" -detectsleep &
+#xss-lock -- xscreensaver-command -lock &
 exec i3
 # exec startxfce4
 # exec ratpoison

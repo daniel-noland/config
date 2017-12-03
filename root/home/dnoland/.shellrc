@@ -1,5 +1,8 @@
 export PATH="${HOME}/.bin:${PATH}"
 export TERM='screen-256color'
+#placate gpg-agent
+export GPG_TTY=$(tty)
+gpg-connect-agent updatestartuptty /bye >/dev/null
 # Source my aliases
 if [ -f ~/.aliasrc ]; then
     source ~/.aliasrc
@@ -201,8 +204,6 @@ mcd() {
    mkdir "$1" && cd "$1";
 }
 
-#placate gpg-agent
-export GPG_TTY=$(tty)
 
 #print the current shell
 shell () {
@@ -289,4 +290,17 @@ jj() {
    target="$(mrused ${1})"
    [[ -d "${target}" ]] && cd "${target}" && return 0;
    [[ -f "${target}" ]] && auto_open "${target}" && return $?
+}
+
+scat() {
+   if [ -z "${1}" ]; then
+      slackcat -c dnoland
+   else
+      target=${1:-dnoland}
+      slackcat ${1} ${@:1}
+   fi
+}
+
+pmgr() {
+   bb-wrapper --color=always --aur ${@}
 }

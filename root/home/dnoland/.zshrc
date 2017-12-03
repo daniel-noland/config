@@ -31,7 +31,7 @@ if [[ -x $(whence -c powerline) ]]; then
    # powerline-daemon --quiet
    # POWERLINE_COMMAND=powerline-client
    export LANG="en_US.UTF-8"
-   source /usr/lib/python3.5/site-packages/powerline/bindings/zsh/powerline.zsh
+   source /usr/lib/$(basename $(readlink -f $(whence python)))/site-packages/powerline/bindings/zsh/powerline.zsh
    # source /usr/share/zsh/site-contrib/powerline.zsh
 else
    setopt prompt_subst
@@ -88,13 +88,8 @@ autoload -U zmv
 export KEYTIMEOUT=0
 
 # for gpg agent
-if [ -f "${HOME}/.gnupg/gpg-agent.env" ]; then
-   source "${HOME}/.gnupg/gpg-agent.env"
-   export GPG_AGENT_INFO
-   export SSH_AUTH_SOCK
-   # export SSH_ASKPASS=qt4-ssh-askpass
 
-fi
+gpg-connect-agent updatestartuptty /bye >/dev/null
 
 shred() {
    local iterations="--iterations=1"
@@ -413,7 +408,7 @@ eval "$(fasd --init auto)"
 
 # For generalized system update: don't forget git packages!
 update-system() {
-   pacaur -Syu --devel
+   bb-wrapper --aur -Syu --devel
 }
 
 bindkey "^R" history-incremental-search-backward
@@ -422,12 +417,39 @@ export WORKON_HOME="$HOME/virtualenvs"
 export PYTHON_PATH="."
 source $(which virtualenvwrapper.sh)
 
-if [[ -z "$TMUX" ]] ;then
-    ID="`tmux ls | grep -vm1 attached | cut -d: -f1`" # get the id of a deattached session
-    if [[ -z "$ID" ]] ;then # if not available create a new one
-        tmux new-session
-    else
-        tmux attach-session -t "$ID" # if available attach to it
-    fi
-    exit
+# if [[ -z "$TMUX" ]] ;then
+#     ID="`tmux ls | grep -vm1 attached | cut -d: -f1`" # get the id of a deattached session
+#     if [[ -z "$ID" ]] ;then # if not available create a new one
+#         tmux new-session
+#     else
+#         tmux attach-session -t "$ID" # if available attach to it
+#     fi
+#     exit
+# fi
+
+export MAKEFLAGS=$(( $(nproc) + 1 ))
+
+bindkey '\C-x\C-e' edit-command-line
+setopt autopushd
+setopt pushdignoredups
+
+autoload -U compinit && compinit
+zstyle ':completion:*' menu select=5
+zstyle ':completion:*' group-name ''
+setopt menu_complete
+# format all messages not formatted in bold prefixed with ----
+zstyle ':completion:*' format '%B---- %B%d%H%h%b'
+# format descriptions (notice the vt100 escapes)
+#zstyle ':completion:*:descriptions'    format $'%{\e[0;31m%}completing %B%d%b%{\e[0m%}'
+# bold and underline normal messages
+#zstyle ':completion:*:messages' format '%B%U---- %d%u%b'
+# format in bold red error messages
+#zstyle ':completion:*:warnings' format "%B$fg[red]%}---- no match for: $fg[white]%d%b"
+# activate approximate completion, but only after regular completion (_complete)
+#zstyle ':completion:::::' completer _complete _approximate
+
+# # Set SSH to use gpg-agent
+unset SSH_AGENT_PID
+if [ "${gnupg_SSH_AUTH_SOCK_by:-0}" -ne $$ ]; then
+  export SSH_AUTH_SOCK="/run/user/$UID/gnupg/S.gpg-agent.ssh"
 fi

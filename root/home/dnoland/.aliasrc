@@ -1,5 +1,5 @@
 export EDITOR=$(which nvim || which vim)
-export PAGER=less
+export PAGER="less -R"
 export MULTIPLEXER=tmux
 alias screen=${MULTIPLEXER}
 alias tmux=${MULTIPLEXER}
@@ -16,6 +16,7 @@ alias cla="clear; ls -a"
 alias clla="clear; ls -la"
 #List commands
 alias l="ls --color=always"
+alias ls="ls --color=always"
 alias sl="ls --color=always"
 alias la="ls -a --color=always"
 alias ll="ls -l -h --color=always"

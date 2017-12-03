@@ -20,7 +20,7 @@ hi ErrorMsg		guifg=#ffffff guibg=#287eff						ctermfg=darkcyan ctermbg=none
 hi Visual		guifg=#8080ff guibg=fg		gui=reverse				ctermfg=40 ctermbg=17 cterm=bold
 "hi VisualNOS	guifg=#8080ff guibg=fg		gui=reverse,underline	ctermfg=lightblue ctermbg=fg cterm=reverse,underline
 hi Todo			guifg=#d14a14 guibg=#1248d1						cterm=bold ctermfg=red	ctermbg=none
-hi Search		guifg=#90fff0 guibg=#2050d0						ctermfg=white ctermbg=17 cterm=underline term=underline cterm=bold
+hi Search		guifg=#90fff0 guibg=#2050d0						ctermfg=white ctermbg=17 cterm=bold term=bold cterm=bold
 hi IncSearch	guifg=darkblue guibg=darkgray							ctermfg=darkblue ctermbg=darkgray term=bold cterm=bold
 
 hi SpecialKey		guifg=cyan			ctermfg=darkcyan
@@ -49,7 +49,7 @@ hi DiffText	guifg=lightgray cterm=bold ctermbg=red gui=bold guibg=Red
 hi Cursor	guifg=cyan guibg=#454585 ctermfg=cyan ctermbg=yellow cterm=bold term=bold
 hi lCursor	guifg=cyan guibg=white ctermfg=white ctermbg=cyan cterm=bold term=bold
 hi CursorColumn cterm=bold ctermfg=none ctermbg=none guibg=#151515
-hi CursorLine cterm=underline ctermbg=none guibg=#151515 term=bold
+hi CursorLine cterm=bold ctermbg=none guibg=#151515 term=bold
 
 
 hi Comment	guifg=#80a0ff ctermfg=cyan

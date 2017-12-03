@@ -20,19 +20,8 @@ if [ -z "$debian_chroot" ] && [ -r /etc/debian_chroot ]; then
 fi
 
 
-# If this is an xterm set the title to user@host:dir
-case "$TERM" in
-xterm*|rxvt*)
-    PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD/$HOME/~}\007"'
-    ;;
-*)
-    ;;
-esac
-
-
 #Set the default editor... die nano die die die.
-export EDITOR=vim #an editor for grown ups.
-export PAGER=vimpager
+export EDITOR=$(which nvim || which vim) #an editor for grown ups.
 #tmux ftw
 export MULTIPLEXER="tmux -u"
 
@@ -63,7 +52,7 @@ source ~/.bash/git-prompt.bash
 
 # Non color version
 #PS1="\u@\h:\w\$(parse_git_branch_or_tag) \n$ " 
-PS1="${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\[\033[01;32m\] \$(parse_git_branch_or_tag)\[\033[00m\]\n$ "
+# PS1="${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\[\033[01;32m\] \$(parse_git_branch_or_tag)\[\033[00m\]\n$ "
 
 #GPG
 #if [ -f "${HOME}/.gpg-agent-info" ]; then
@@ -74,14 +63,14 @@ PS1="${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[0
 #GPG_TTY=$(tty)
 #export GPG_TTY
 # change the prompt in git repos to reflect the checked out branch
-source ~/.bash/git-prompt.bash
+# source ~/.bash/git-prompt.bash
 
 #Fancy prompt
-PS1="${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\[\033[01;32m\] \$(parse_git_branch_or_tag)\[\033[00m\]\n$ "
+PS1="${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\[\033[01;32m\] \[\033[00m\]\n$ "
 
 #Super fancy powerline prompt
 #powerline
-source /usr/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh
+# source /usr/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh
 
 SHOPT=$(which shopt)
 if [ -z $SHOPT ]; then

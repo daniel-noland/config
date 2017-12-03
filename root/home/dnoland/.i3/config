@@ -16,7 +16,7 @@ set $mod Mod4
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
 # font pango:DejaVu Sans Mono 8
-font pango:Droid Sans Mono for Powerline 14
+font pango:Droid Sans Mono 18
 # Before i3 v4.8, we used to recommend this one as the default:
 # font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
 # The font above is very space-efficient, that is, it looks good, sharp and
@@ -29,24 +29,21 @@ floating_modifier $mod
 
 # start a terminal
 bindsym $mod+Return exec terminator
+#bindsym $mod+Shift+Return exec terminator -x ssh root@10.100.100.20
 #bindsym $mod+Shift+Return exec terminator -x /home/dnoland/.bin/tmuxSecondary.sh
 # bindsym $mod+Shift+Return exec terminator
-
-# start a browser
-bindsym $mod+b exec /usr/bin/firejail --seccomp --private /usr/bin/firefox
-
-# start email client
-bindsym $mod+m exec /usr/bin/firejail --seccomp /usr/bin/thunderbird
 
 # kill focused window
 bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
 bindsym $mod+d exec dmenu_run -l 5 -fn 'Droid Sans Mono-20'
-bindsym $mod+u exec ~/.bin/dtype.zsh
 
-# start clipmenu (clipboard manager)
-bindsym $mod+c exec clipmenu
+# focus the child container
+bindsym $mod+c focus child
+# focus the parent container
+bindsym $mod+u focus parent
+bindsym $mod+uparrow focus parent
 
 # lookup a password (password manager)
 bindsym $mod+g exec passmenu -p "pass:" -l 5 -fn 'Droid Sans Mono-20'
@@ -58,22 +55,29 @@ bindsym $mod+g exec passmenu -p "pass:" -l 5 -fn 'Droid Sans Mono-20'
 bindsym $mod+apostrophe exec ~/.bin/tmux_menu.sh 
 
 # change focus
-bindsym $mod+h focus left
-bindsym $mod+j focus down
-bindsym $mod+k focus up
-bindsym $mod+l focus right
+bindsym $mod+h focus output left
+bindsym $mod+j focus right
+bindsym $mod+k focus left
+bindsym $mod+l focus output right
 
-# move focused window
-bindsym $mod+Shift+j move left
-bindsym $mod+Shift+k move down
-bindsym $mod+Shift+l move up
-bindsym $mod+Shift+semicolon move right
+bindsym $mod+Shift+h focus left
+bindsym $mod+Shift+j focus right
+bindsym $mod+Shift+k focus left
+bindsym $mod+Shift+l focus right
+
+bindsym $mod+n workspace next_on_output
+bindsym $mod+Shift+N move workspace to output right
+bindsym $mod+p workspace prev_on_output
+bindsym $mod+Shift+P move workspace to output left
+
+force_focus_wrapping yes
+
 
 # split in horizontal orientation
 bindsym $mod+backslash split h
 
 # split in vertical orientation
-bindsym $mod+bar split v
+bindsym $mod+Shift+bar split v
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
@@ -82,6 +86,7 @@ bindsym $mod+f fullscreen toggle
 bindsym $mod+s layout stacking
 bindsym $mod+semicolon layout tabbed
 bindsym $mod+i layout toggle split
+bindsym $mod+9 layout toggle split
 
 # toggle tiling / floating
 bindsym $mod+t floating toggle
@@ -89,30 +94,21 @@ bindsym $mod+t floating toggle
 # change focus between tiling / floating windows
 bindsym $mod+Mod1+space focus mode_toggle
 
-# focus the parent container
-# bindsym $mod+up focus parent
-
-# focus the child container
-# bindsym $mod+down focus child
-
-
 # switch to workspace
-bindsym $mod+1 workspace 1:browse
-bindsym $mod+2 workspace 2:term
-bindsym $mod+3 workspace 3:com
-bindsym $mod+4 workspace 4:mail
-bindsym $mod+5 workspace 5:main
-bindsym $mod+6 workspace 6:tall
-bindsym $mod+7 workspace 7
-bindsym $mod+8 workspace 8
-bindsym $mod+9 workspace 9
-bindsym $mod+0 workspace 10
-
+#bindsym $mod+1 workspace 1:browse
+#bindsym $mod+2 workspace 2:term
+#bindsym $mod+3 workspace 3:tasks
+#bindsym $mod+4 workspace 4:other
+#bindsym $mod+7 workspace 7
+#bindsym $mod+8 workspace 8
+#bindsym $mod+9 workspace 9
+#bindsym $mod+0 workspace 10
+#
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace 1:browse
 bindsym $mod+Shift+2 move container to workspace 2:term
-bindsym $mod+Shift+3 move container to workspace 3:com
-bindsym $mod+Shift+4 move container to workspace 4:mail
+bindsym $mod+Shift+3 move container to workspace 3:tasks
+bindsym $mod+Shift+4 move container to workspace 4:other
 bindsym $mod+Shift+5 move container to workspace 5:main
 bindsym $mod+Shift+6 move container to workspace 6:tall
 bindsym $mod+Shift+7 move container to workspace 7
@@ -146,37 +142,65 @@ mode "resize" {
         bindsym Escape mode "default"
 }
 
+mode "mark" {
+   bindsym shift+w mark --replace --toggle work; mode "default"
+   bindsym w [con_mark="work"] focus; mode "default"
+   bindsym shift+b mark --replace --toggle browse; mode "default"
+   bindsym b [con_mark="browse"] focus; mode "default"
+
+   bindsym Return mode "default"
+   bindsym Escape mode "default"
+}
+
 bindsym $mod+r mode "resize"
+bindsym $mod+m mode "mark"
+bindsym $mod+x [con_mark="work"] focus
+bindsym $mod+shift+x mark --replace --toggle work
+bindsym $mod+z [con_mark="browse"] focus
+bindsym $mod+shift+z mark --replace --toggle browse
+
+
+bindsym $mod+a scratchpad show
+bindsym $mod+Shift+a move scratchpad
+
+bindsym $mod+1 workspace next_on_output
+bindsym $mod+2 scratchpad show, [floating] fullscreen enable
+bindsym --whole-window $mod+button4 workspace next_on_output
+bindsym --whole-window $mod+button5 workspace prev_on_output
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-        status_command i3status
+        status_command i3status 
 }
 
 
-bindsym $mod+n workspace next_on_output
-bindsym $mod+Shift+N move workspace to output right
-bindsym $mod+p workspace prev_on_output
-bindsym $mod+Shift+P move workspace to output left
+bindsym $mod+y exec scrot -s
 
-assign [class="^Vimperator.*$"] 1:browse
+
+assign [class="^Chromium$"] 1:browse
 assign [class="^Terminator$"] 2:term
-assign [class="^Skype$"] 3:com
-assign [class="^Mumble$"] 3:com
-assign [class="^Thunderbird$"] 3:com
+assign [class="^Keybase$"] 4:other
 
-# workspace 1:browse output DP-1
-# workspace 2:term output DP-1
+workspace 1:browse output DVI-I-1
+workspace 2:term output HDMI-4
+workspace 4:other output DVI-I-1
 # workspace 3:com output DVI-I-1
 # workspace 4:mail output DVI-D-0
 
 for_window [class="^.*"] border pixel 0
 
+workspace_layout tabbed
+
+exec ~/.screenlayout/navi.sh
+exec xsetroot -solid "#000000"
+#exec /usr/bin/nm-applet
 exec /usr/bin/clipmenud
 exec /usr/bin/run_keybase 
 # exec /usr/bin/firejail --seccomp /usr/bin/firefox
-# exec /usr/bin/firejail --seccomp /usr/bin/thunderbird
-exec /usr/bin/firejail --name=browser --shell=none --dns=8.8.4.4 --dns=8.8.8.8 /usr/bin/chromium
+#exec /usr/bin/firejail --seccomp /usr/bin/thunderbird
+exec /usr/bin/firejail --name=browser --shell=none /usr/bin/chromium
 exec /usr/bin/terminator
-exec /usr/bin/terminator -x tmux -c firejail --seccomp hangups
+#exec /usr/bin/volumeicon
+#exec /usr/bin/sleep 2 && ~/.screenlayout/stateless.sh
+# exec /usr/bin/terminator -x tmux -c firejail --seccomp hangups

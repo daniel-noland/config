@@ -46,7 +46,7 @@ set expandtab
 set smarttab
 " Don't set this with filetype plugin indent on
 " set smartindent
-set tabstop=3
+set tabstop=4
 set shiftwidth=3
 set hlsearch
 set incsearch
@@ -71,8 +71,8 @@ set backupdir=~/.vim-tmp,~/.tmp
 set directory=~/.vim-tmp,~/.tmp
 set backspace=indent,eol,start
 set shortmess=atIWAc
-set timeoutlen=1200
-set ttimeoutlen=50
+set timeoutlen=444
+set ttimeoutlen=10
 
 " current directory is always matching the
 " content of the active window
@@ -132,32 +132,31 @@ augroup END
 " NERDTree toggle
 nnoremap "" :NERDTreeTabsToggle<CR>
 
+" " Coveragepy
+" nnoremap <leader>c :Coveragepy session<CR>
+" nnoremap <leader>j :Coveragepy show<CR>
+" nnoremap <leader>r :Coveragepy refresh<CR>
+
 " Normal mode mappings
 noremap J 5<down>
 noremap K 5<up>
 noremap H 5<left>
 noremap L 5<right>
+noremap <C-j> 3j3<C-e>
+noremap <C-k> 3k3<C-y>
 nnoremap <silent><leader>v :vsplit<cr>
 nnoremap <silent><leader>h :split<cr>
-noremap <C-l> :bnext<CR>
-noremap <C-h> :bprevious<CR>
-" This is a hack because C-h is interpreted as a backspace.  Not ideal...
-noremap <backspace> :bprevious<CR>
-nnoremap <M-t> :tabnew<CR>
-nnoremap <M-,> :tabprevious<CR>
-nnoremap <M-.> :tabnext<CR>
+" noremap <C-l> :bnext<CR>
+" noremap <C-h> :bprevious<CR>
+" nnoremap <M-t> :tabnew<CR>
+" nnoremap <M-,> :tabprevious<CR>
+" nnoremap <M-.> :tabnext<CR>
 
 " nnoremap <leader>t :tabnew<space>
 nnoremap <leader>p :setlocal paste!<CR>
 nnoremap <leader>s :setlocal spell!<CR>
-nnoremap zz z=
-nnoremap <leader>mf :MultipleCursorsFind<space><c-r>=expand("<cword>")<cr>
-vnoremap <leader>mf :MultipleCursorsFind<space>
+" nnoremap zz z=
 
-" Quick replace
-
-nnoremap <leader>sv :%Subvert/<c-r>=expand("<cword>")<cr>//g<left><left>
-nnoremap ! :perldo s/(<c-r>=expand("<cword>")<cr>)//g<left><left>
 
 " Simple script to toggle relative or abs line numbers
 function! NumberToggle()
@@ -178,8 +177,6 @@ function! NumberFix()
    endif
 endfunc
 
-nnoremap <leader># :call NumberToggle()<cr>
-
 " Automatically switch to abs line numbers when focus is lost
 augroup LineNumberCorrection
    autocmd!
@@ -190,12 +187,6 @@ augroup END
 
 " Automatacally open bookmarks in NERDTree
 let g:NERDTreeShowBookmarkd=1
-
-" include my neobundles from another file
-source $HOME/.neobundlerc
-
-" Pretty line wraps:
-set showbreak=↪
 
 " Fix syntax hilighting on my .shellrc file
 " TODO: Use vim ft annotations to obviate this command
@@ -263,6 +254,7 @@ function! HistDiff()
    wincmd h
    diffupdate
    " call SetupDiff()
+   " hello
 endfunc
 
 " nnoremap <silent><leader>hd :call HistDiff()<CR>
@@ -271,13 +263,13 @@ endfunc
 noremap <silent> <leader>, :nohlsearch<cr>
 
 " Fix the "sudo" problem
-" cmap w!! w !sudo tee % >/dev/null
+cmap w!! w !sudo tee % >/dev/null
 
-" vim-session
-let g:session_default_overwrite = 1
-let g:session_autosave = 'yes'
-let g:session_autosave_periodic = 1
-let g:session_autoload = 'yes'
+" " vim-session
+" let g:session_default_overwrite = 1
+" let g:session_autosave = 'yes'
+" let g:session_autosave_periodic = 1
+" let g:session_autoload = 'yes'
 
 " CtrlP configuration
 " let g:ctrlp_map = '<c-o>'
@@ -287,11 +279,11 @@ noremap '' :CtrlPMRU<CR>
 
 " Fugitive mappings:
 nnoremap <leader>gs :Gstatus<CR>
-nnoremap <leader>gl :!git log<CR>
-nnoremap <leader>gc :Gcommit<CR>
-nnoremap <leader>gd :Gvdiff<CR>
-nnoremap <leader>gt :!git lg<CR><CR>
-nnoremap <leader>gm :!git mergetool<CR>
+" nnoremap <leader>gl :!git log<CR>
+" nnoremap <leader>gc :Gcommit<CR>
+" nnoremap <leader>gd :Gvdiff<CR>
+" nnoremap <leader>gt :!git lg<CR><CR>
+" nnoremap <leader>gm :!git mergetool<CR>
 
 " Conventional shifting in visual mode
 vnoremap < <gv
@@ -301,17 +293,14 @@ vnoremap > >gv
 nnoremap \|\| :TagbarToggle<CR>
 
 " " Try to end the set paste dance
-inoremap <C-p> :set paste<CR>"+p:set paste!<CR>
+" inoremap <C-p> :set paste<CR>"+p:set paste!<CR>
 " noremap <C-p> :set paste<CR>"+p:set paste!<CR>
 
 " Make searching more sane
 nnoremap / /\v
 nnoremap ? ?\v
-nnoremap <leader>] :%!perl -p -e "s///g"<left><left><left><left>
 vnoremap / /\v
 vnoremap ? ?\v
-vnoremap <leader>] :!perl -p -e "s///g"<left><left><left><left>
-nnoremap <leader>^ :%!perl -p -e "s///g"<left><left><left><left>
 " cnoremap %s %smagic/
 " cnoremap %p
 " TODO: Think about these commands and what they do
@@ -324,51 +313,52 @@ let g:syntastic_aggregate_errors = 1
 let g:syntastic_cpp_compiler = "clang++"
 let g:syntastic_cpp_compiler_options = "-std=c++17"
 let g:syntastic_cpp_checkers = ['cppcheck', 'gcc']
-let g:syntastic_python_pylint_args = "--rcfile="
+let g:syntastic_python_pylint_args = "--rcfile=~/.config/pylintrc"
 
-let g:syntastic_typescript_checks=['tsc', 'tslint']
+"let g:syntastic_tvarypescript_checks=['tslint']
+let g:syntastic_tvarypescript_checks=[]
 let g:syntastic_typescript_tsc_args=['--target', 'ES2015', '--jsx', 'react']
 "
-" Automatically save and restore views:
-set viewoptions-=options
-let g:skipview_files = [ '[EXAMPLE PLUGIN BUFFER]' ]
-function! MakeViewCheck()
-    if has('quickfix') && &buftype =~ 'nofile'
-        " Buffer is marked as not a file
-        return 0
-    endif
-    if empty(glob(expand('%:p')))
-        " File does not exist on disk
-        return 0
-    endif
-    if len($TEMP) && expand('%:p:h') == $TEMP
-        " We're in a temp dir
-        return 0
-    endif
-    if len($TMP) && expand('%:p:h') == $TMP
-        " Also in temp dir
-        return 0
-    endif
-    if index(g:skipview_files, expand('%')) >= 0
-        " File is in skip list
-        return 0
-    endif
-    return 1
-endfunction
+" " Automatically save and restore views:
+" set viewoptions-=options
+" let g:skipview_files = [ '[EXAMPLE PLUGIN BUFFER]' ]
+" function! MakeViewCheck()
+"     if has('quickfix') && &buftype =~ 'nofile'
+"         " Buffer is marked as not a file
+"         return 0
+"     endif
+"     if empty(glob(expand('%:p')))
+"         " File does not exist on disk
+"         return 0
+"     endif
+"     if len($TEMP) && expand('%:p:h') == $TEMP
+"         " We're in a temp dir
+"         return 0
+"     endif
+"     if len($TMP) && expand('%:p:h') == $TMP
+"         " Also in temp dir
+"         return 0
+"     endif
+"     if index(g:skipview_files, expand('%')) >= 0
+"         " File is in skip list
+"         return 0
+"     endif
+"     return 1
+" endfunction
 
-" Autosave & Load Views.
-augroup VimrcAutoView
-    autocmd!
-    autocmd BufWritePost,BufLeave,WinLeave ?* if MakeViewCheck() | mkview | endif
-    autocmd BufWinEnter ?* if MakeViewCheck() | silent loadview | endif
-augroup END
+" " Autosave & Load Views.
+" augroup VimrcAutoView
+"     autocmd!
+"     autocmd BufWritePost,BufLeave,WinLeave ?* if MakeViewCheck() | mkview | endif
+"     autocmd BufWinEnter ?* if MakeViewCheck() | silent loadview | endif
+" augroup END
 
-" Ultisnips configuration
-" set runtimepath+=~/.vim/bundle/ultisnips/
-let g:UltiSnipsExpandTrigger="<A-space>"
-let g:UltiSnipsJumpForwardTrigger="<c-j>"
-let g:UltiSnipsJumpBackwardTrigger="<c-k>"
-let g:UltiSnipsEditSplit="vertical"
+" " Ultisnips configuration
+" " set runtimepath+=~/.vim/bundle/ultisnips/
+" let g:UltiSnipsExpandTrigger="<A-space>"
+" let g:UltiSnipsJumpForwardTrigger="<c-j>"
+" let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+" let g:UltiSnipsEditSplit="vertical"
 
 " " Scratch Pad
 " let g:scratchPadDropTo = "in"
@@ -423,26 +413,24 @@ nnoremap <F8> :TComment<CR>
 nnoremap <M-space> :TComment<CR>
 vnoremap <F8> :TComment<CR>
 vnoremap <M-space> :TComment<CR>
-inoremap <F8> <ESC>:TComment<CR>
 
-" Undo tree
-nnoremap <leader>u :UndotreeToggle<CR>
-nnoremap <M-u> :UndotreeToggle<CR>
-inoremap <M-u> :UndotreeToggle<CR>
-cnoremap <M-u> :UndotreeToggle<CR>
-vnoremap <M-u> :UndotreeToggle<CR>
+" " Undo tree
+" nnoremap <M-u> :UndotreeToggle<CR>
+"inoremap <M-u> :UndotreeToggle<CR>
+"cnoremap <M-u> :UndotreeToggle<CR>
+"vnoremap <M-u> :UndotreeToggle<CR>
 
 " Set up persist undo
 set undofile
 set undodir=$HOME/.vim/undo/
-set undolevels=1000
-set undoreload=1000
-let g:undotree_WindowLayout = 3
-let g:undotree_SplitWidth = 45
-let g:undotree_DiffpanelHeight = 12
-let g:undotree_SetFocusWhenToggle = 1
-let g:undotree_TreeNodeShape = '◈'
-let g:undotree_DiffAutoOpen = 1
+set undolevels=300
+set undoreload=300
+" let g:undotree_WindowLayout = 3
+" let g:undotree_SplitWidth = 45
+" let g:undotree_DiffpanelHeight = 12
+" let g:undotree_SetFocusWhenToggle = 1
+" let g:undotree_TreeNodeShape = '◈'
+" let g:undotree_DiffAutoOpen = 1
 
 command! DiffOrig vert new | set bt=nofile | r ++edit # | 0d_
    \ | diffthis | wincmd p | diffthis | diffupdate
@@ -507,6 +495,7 @@ vmap <C-3> "Cy
 nmap <C-3> "Cyy
 nnoremap <M-3> "cp
 
+
 " Vim typescrip.tsx support (experimental)
 let g:typescript_compiler_options = '--jsx "react" --target "ES2015"'
 " Lightline config
@@ -561,3 +550,83 @@ inoremap <silent> <A-j> <esc>:TmuxNavigateDown<CR>
 inoremap <silent> <A-k> <esc>:TmuxNavigateUp<CR>
 inoremap <silent> <A-l> <esc>:TmuxNavigateRight<CR>
 nnoremap <silent> <A-b> <esc>:TmuxNavigatePrevious<CR>
+
+
+let g:neotags_enabled = 1
+
+call plug#begin('~/.vim/plugged')
+"Plug 'WolfgangMehner/vim-plugins'
+Plug 'kien/rainbow_parentheses.vim'
+Plug 'majutsushi/tagbar'
+Plug 'scrooloose/nerdtree'
+" Plug 'scrooloose/syntastic'
+" Plug 'terryma/vim-multiple-cursors'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-surround'
+"Plug 'tpope/vim-jdaddy'
+"Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-dispatch'
+" Plug 'vim-scripts/Color-Sampler-Pack'
+" Plug 'vim-scripts/L9'
+" Plug 'vim-scripts/ctrlp.vim'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'xolox/vim-misc'
+" Plug 'rstacruz/sparkup'
+"Plug 'tobyS/skeletons.vim'
+Plug 'ervandew/supertab'
+"Plug 'mbbill/undotree'
+Plug 'airblade/vim-gitgutter'
+Plug 'saihoooooooo/glowshi-ft.vim'
+" Plug 'Chiel92/vim-autoformat'
+"Plug 'rodjek/vim-puppet'
+Plug 'Shougo/vimproc.vim'
+Plug 'kshenoy/vim-signature'
+Plug 'michaeljsmith/vim-indent-object'
+Plug 'gregsexton/MatchTag'
+"Plug 'osyo-manga/vim-over'
+Plug 'tomtom/tcomment_vim'
+Plug 'jistr/vim-nerdtree-tabs'
+" Plug 'mxw/vim-jsx'
+Plug 'leafgarland/typescript-vim'
+"Plug 'Quramy/tsuquyomi'
+"Plug 'pangloss/vim-javascript'
+Plug 'itchyny/lightline.vim'
+"Plug 'drmikehenry/vim-extline'
+" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'alfredodeza/coveragepy.vim'
+"Plug 'Floobits/floobits-neovim'
+Plug 'w0rp/ale'
+
+" Experiments
+" Plug 'FooSoft/vim-argwrap'
+"Plug 'critiqjo/lldb.nvim'
+"Plug 'jalvesaq/vimcmdline'
+Plug 'christoomey/vim-tmux-navigator'
+" Plug 'davidhalter/jedi'
+" Plug 'zchee/deoplete-jedi'
+" Plug 'jaxbot/github-issues.vim'
+" Plug 'arakashic/chromatica.nvim'
+
+" Plug 'jaxbot/github-issues.vim'
+Plug 'janko-m/vim-test'
+
+
+" Plug 'fntlnz/atags.vim'
+" Plug 'SirVer/ultisnips'
+" Plug 'honza/vim-snippets'
+" Plug 'c0r73x/neotags.nvim'
+call plug#end()
+
+nmap <silent> <leader>r :TestNearest<CR>
+let test#strategy = "dispatch"
+
+"let g:github_access_token="d1e4ad97cf8474bd3581ffb1797448b8adae691d"
+"let g:gissues_async_omni = 0
+
+" let g:doplete#enable_at_startup = 1
+
+" let g:floo_delete_local_files=1
+" let g:ale_python_pylint_options="-rcfile=/home/dnoland/.config/pylintrc"
+" let g:chromatica#libclang_path='/usr/lib/'
+" let g:chromatica#enable_at_startup=1
+" let g:chromatica#responsive_mode=1

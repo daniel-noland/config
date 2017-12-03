@@ -1,7 +1,7 @@
 [user]
    name = Daniel Noland
    email = daniel.noland@gmail.com
-	signingkey = 68D715BC3E03BEFB3485A81EB540F2BB188873FF
+   signingkey = 0xB540F2BB188873FF
 [transfer]
    fsckobjects = true
 [fetch]
@@ -10,6 +10,7 @@
    fsckobjects = true
 [push]
    default = simple
+   followTags = true
 [color]
    branch = auto
    diff = auto
@@ -29,24 +30,31 @@
    files = ls-tree -r --name-only --full-tree HEAD
 
 [web]
-   browser = chrome
+   browser = chromium
 [browser "chrome"]
-   cmd = /usr/bin/google-chrome-beta
+   cmd = /usr/bin/chromium
 [credential]
    helper = cache --timeout=3600
 [merge]
-   tool = splice
+	tool = fugitive
 [mergetool "diffconflicts"]
    cmd = diffconflicts vim $BASE $LOCAL $REMOTE $MERGED
    trustExitCode = true
    keepBackup = false¬
 [mergetool "splice"]
-   cmd = "vim -f $BASE $LOCAL $REMOTE $MERGED -c 'SpliceInit'"
+   cmd = "nvim -f $BASE $LOCAL $REMOTE $MERGED -c 'SpliceInit'"
    keepBackup = false
    trustExitCode = true
 [commit]
-   gpgsign = true
+   gpgsign = false
+   # gpgsign = false
 [diff]
    difftool = splice
 [core]
    pager = less -F -X
+[github]
+	user = daniel-noland
+[ghi]
+	token = 01ff7a135fc1ad4885927ab5fbae36f91f6f5290
+[mergetool "fugitive"]
+	cmd = nvim -f -c \"Gdiff\" \"$MERGED\"
