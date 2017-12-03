@@ -47,6 +47,7 @@ bindsym $mod+uparrow focus parent
 
 # lookup a password (password manager)
 bindsym $mod+g exec passmenu -p "pass:" -l 5 -fn 'Droid Sans Mono-20'
+bindsym $mod+Next exec nmcli_dmenu
 
 # quickswitch
 # bindsym $mod+space exec --no-startup-id quickswitch.py

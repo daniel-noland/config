@@ -58,8 +58,3 @@ fi
 #xautolock -time 100 -locker "systemctl suspend" -detectsleep &
 #xss-lock -- xscreensaver-command -lock &
 exec i3
-# exec startxfce4
-# exec ratpoison
-# exec startfluxbox
-# exec awesome
-# log ".xinitrc finished"

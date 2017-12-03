@@ -532,7 +532,7 @@ endfunction
 "    set &ft=sh
 " endfunction
 
-nnoremap <leader>t :call Terminal()<CR>
+" nnoremap <leader>t :call Terminal()<CR>
 
 augroup AutoTerminal
    autocmd!

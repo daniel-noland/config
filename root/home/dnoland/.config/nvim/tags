@@ -1,0 +1,406 @@
+!	init.vim	/^nnoremap ! :perldo s\/(<c-r>=expand("<cword>")<cr>)\/\/g<left><left>$/;"	m
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+""	init.vim	/^nnoremap "" :NERDTreeTabsToggle<CR>$/;"	m
+$PATH	init.vim	/^let $PATH .= ':\/usr\/local\/bin:\/home\/dnoland\/.bin\/'$/;"	v
+''	init.vim	/^noremap '' :CtrlPMRU<CR>$/;"	m
+/	init.vim	/^nnoremap \/ \/\\v$/;"	m
+/	init.vim	/^vnoremap \/ \/\\v$/;"	m
+1	init.vim	/^vmap 1 "Ay$/;"	m
+2	init.vim	/^vmap 2 "By$/;"	m
+3	init.vim	/^vmap 3 "Cy$/;"	m
+;	init.vim	/^nmap ; <plug>(glowshi-ft-repeat)$/;"	m
+;	init.vim	/^vmap ; <plug>(glowshi-ft-repeat)$/;"	m
+<	init.vim	/^vnoremap < <gv$/;"	m
+<A-b>	init.vim	/^nnoremap <silent> <A-b> <esc>:TmuxNavigatePrevious<CR>$/;"	m
+<A-h>	init.vim	/^inoremap <silent> <A-h> <esc>:TmuxNavigateLeft<CR>$/;"	m
+<A-h>	init.vim	/^nnoremap <A-h> <C-w>h$/;"	m
+<A-h>	init.vim	/^nnoremap <silent> <A-h> :TmuxNavigateLeft<CR>$/;"	m
+<A-j>	init.vim	/^inoremap <silent> <A-j> <esc>:TmuxNavigateDown<CR>$/;"	m
+<A-j>	init.vim	/^nnoremap <A-j> <C-w>j$/;"	m
+<A-j>	init.vim	/^nnoremap <silent> <A-j> :TmuxNavigateDown<CR>$/;"	m
+<A-k>	init.vim	/^inoremap <silent> <A-k> <esc>:TmuxNavigateUp<CR>$/;"	m
+<A-k>	init.vim	/^nnoremap <A-k> <C-w>k$/;"	m
+<A-k>	init.vim	/^nnoremap <silent> <A-k> :TmuxNavigateUp<CR>$/;"	m
+<A-l>	init.vim	/^inoremap <silent> <A-l> <esc>:TmuxNavigateRight<CR>$/;"	m
+<A-l>	init.vim	/^nnoremap <A-l> <C-w>l$/;"	m
+<A-l>	init.vim	/^nnoremap <silent> <A-l> :TmuxNavigateRight<CR>$/;"	m
+<C-1>	init.vim	/^nmap <C-1> "Ayy$/;"	m
+<C-1>	init.vim	/^vmap <C-1> "Ay$/;"	m
+<C-2>	init.vim	/^nmap <C-2> "Byy$/;"	m
+<C-2>	init.vim	/^vmap <C-2> "By$/;"	m
+<C-3>	init.vim	/^nmap <C-3> "Cyy$/;"	m
+<C-3>	init.vim	/^vmap <C-3> "Cy$/;"	m
+<C-h>	init.vim	/^noremap <C-h> :bprevious<CR>$/;"	m
+<C-l>	init.vim	/^noremap <C-l> :bnext<CR>$/;"	m
+<C-p>	init.vim	/^inoremap <C-p> :set paste<CR>"+p:set paste!<CR>$/;"	m
+<C-x>	init.vim	/^nnoremap <C-x> q:i$/;"	m
+<F8>	init.vim	/^inoremap <F8> <ESC>:TComment<CR>$/;"	m
+<F8>	init.vim	/^nnoremap <F8> :TComment<CR>$/;"	m
+<F8>	init.vim	/^vnoremap <F8> :TComment<CR>$/;"	m
+<M-,>	init.vim	/^nnoremap <M-,> :tabprevious<CR>$/;"	m
+<M-.>	init.vim	/^nnoremap <M-.> :tabnext<CR>$/;"	m
+<M-1>	init.vim	/^nnoremap <M-1> "ap$/;"	m
+<M-2>	init.vim	/^nnoremap <M-2> "bp$/;"	m
+<M-3>	init.vim	/^nnoremap <M-3> "cp$/;"	m
+<M-b>	init.vim	/^noremap <M-b> :CtrlPBuffer<CR>$/;"	m
+<M-m>	init.vim	/^noremap <M-m> :CtrlPMixed<CR>$/;"	m
+<M-space>	init.vim	/^nnoremap <M-space> :TComment<CR>$/;"	m
+<M-space>	init.vim	/^vnoremap <M-space> :TComment<CR>$/;"	m
+<M-t>	init.vim	/^nnoremap <M-t> :tabnew<CR>$/;"	m
+<M-u>	init.vim	/^cnoremap <M-u> :UndotreeToggle<CR>$/;"	m
+<M-u>	init.vim	/^inoremap <M-u> :UndotreeToggle<CR>$/;"	m
+<M-u>	init.vim	/^nnoremap <M-u> :UndotreeToggle<CR>$/;"	m
+<M-u>	init.vim	/^vnoremap <M-u> :UndotreeToggle<CR>$/;"	m
+<backspace>	init.vim	/^noremap <backspace> :bprevious<CR>$/;"	m
+<leader>#	init.vim	/^nnoremap <leader># :call NumberToggle()<cr>$/;"	m
+<leader>,	init.vim	/^noremap <silent> <leader>, :nohlsearch<cr>$/;"	m
+<leader>]	init.vim	/^nnoremap <leader>] :%!perl -p -e "s\/\/\/g"<left><left><left><left>$/;"	m
+<leader>]	init.vim	/^vnoremap <leader>] :!perl -p -e "s\/\/\/g"<left><left><left><left>$/;"	m
+<leader>^	init.vim	/^nnoremap <leader>^ :%!perl -p -e "s\/\/\/g"<left><left><left><left>$/;"	m
+<leader>gc	init.vim	/^nnoremap <leader>gc :Gcommit<CR>$/;"	m
+<leader>gd	init.vim	/^nnoremap <leader>gd :Gvdiff<CR>$/;"	m
+<leader>gl	init.vim	/^nnoremap <leader>gl :!git log<CR>$/;"	m
+<leader>gm	init.vim	/^nnoremap <leader>gm :!git mergetool<CR>$/;"	m
+<leader>gs	init.vim	/^nnoremap <leader>gs :Gstatus<CR>$/;"	m
+<leader>gt	init.vim	/^nnoremap <leader>gt :!git lg<CR><CR>$/;"	m
+<leader>h	init.vim	/^nnoremap <silent><leader>h :split<cr>$/;"	m
+<leader>mf	init.vim	/^nnoremap <leader>mf :MultipleCursorsFind<space><c-r>=expand("<cword>")<cr>$/;"	m
+<leader>mf	init.vim	/^vnoremap <leader>mf :MultipleCursorsFind<space>$/;"	m
+<leader>p	init.vim	/^nnoremap <leader>p :setlocal paste!<CR>$/;"	m
+<leader>s	init.vim	/^nnoremap <leader>s :setlocal spell!<CR>$/;"	m
+<leader>sv	init.vim	/^nnoremap <leader>sv :%Subvert\/<c-r>=expand("<cword>")<cr>\/\/g<left><left>$/;"	m
+<leader>u	init.vim	/^nnoremap <leader>u :UndotreeToggle<CR>$/;"	m
+<leader>v	init.vim	/^nnoremap <silent><leader>v :vsplit<cr>$/;"	m
+<space>	init.vim	/^nnoremap <space> za$/;"	m
+>	init.vim	/^vnoremap > >gv$/;"	m
+?	init.vim	/^nnoremap ? ?\\v$/;"	m
+?	init.vim	/^vnoremap ? ?\\v$/;"	m
+AfterRead	init.vim	/^augroup AfterRead$/;"	a
+AutoTerminal	init.vim	/^augroup AutoTerminal$/;"	a
+BookmarkMapKeys	init.vim	/^function! BookmarkMapKeys()$/;"	f
+BookmarkUnmapKeys	init.vim	/^function! BookmarkUnmapKeys()$/;"	f
+ColorDictParser	colors/dan_custom.vim	/^function! s:ColorDictParser(color_dict)$/;"	f
+ColorDictParser	colors/distinguished.vim	/^	function! s:ColorDictParser(color_dict)$/;"	f
+ColorDictParser	colors/distinguished_dan.vim	/^	function! s:ColorDictParser(color_dict)$/;"	f
+CursorLine	init.vim	/^augroup CursorLine $/;"	a
+DeleteTrailingWS	init.vim	/^func! DeleteTrailingWS()$/;"	f
+DiffOrig	init.vim	/^command! DiffOrig vert new | set bt=nofile | r ++edit # | 0d_$/;"	c
+F	init.vim	/^nmap F <plug>(glowshi-ft-F)$/;"	m
+F	init.vim	/^vmap F <plug>(glowshi-ft-F)$/;"	m
+H	init.vim	/^noremap H 5<left>$/;"	m
+HistDiff	init.vim	/^function! HistDiff()$/;"	f
+J	init.vim	/^noremap J 5<down>$/;"	m
+K	init.vim	/^noremap K 5<up>$/;"	m
+L	init.vim	/^noremap L 5<right>$/;"	m
+LineNumberCorrection	init.vim	/^augroup LineNumberCorrection$/;"	a
+MakeScratch	init.vim	/^function! MakeScratch() $/;"	f
+MakeViewCheck	init.vim	/^function! MakeViewCheck()$/;"	f
+NumberFix	init.vim	/^function! NumberFix()$/;"	f
+NumberToggle	init.vim	/^function! NumberToggle()$/;"	f
+SyntaxFix	init.vim	/^augroup SyntaxFix$/;"	a
+T	init.vim	/^nmap T <plug>(glowshi-ft-T)$/;"	m
+T	init.vim	/^vmap T <plug>(glowshi-ft-T)$/;"	m
+Terminal	init.vim	/^function! Terminal()$/;"	f
+TrailingWhiteSpace	init.vim	/^augroup TrailingWhiteSpace$/;"	a
+VimrcAutoView	init.vim	/^augroup VimrcAutoView$/;"	a
+X	colors/jellybeans.vim	/^fun! s:X(group, fg, bg, attr, lcfg, lcbg)$/;"	f
+\|\|	init.vim	/^nnoremap \\|\\| :TagbarToggle<CR>$/;"	m
+append_ul	autoload/plug.vim	/^function! s:append_ul(lnum, text)$/;"	f
+ask	autoload/plug.vim	/^function! s:ask(message, ...)$/;"	f
+ask_no_interrupt	autoload/plug.vim	/^function! s:ask_no_interrupt(...)$/;"	f
+assign_name	autoload/plug.vim	/^function! s:assign_name()$/;"	f
+assoc	autoload/plug.vim	/^function! s:assoc(dict, key, val)$/;"	f
+bang	autoload/plug.vim	/^function! s:bang(cmd, ...)$/;"	f
+bar	autoload/plug.vim	/^function! s:bar()$/;"	f
+check_ruby	autoload/plug.vim	/^function! s:check_ruby()$/;"	f
+checkout	autoload/plug.vim	/^function! s:checkout(spec)$/;"	f
+chsh	autoload/plug.vim	/^function! s:chsh(swap)$/;"	f
+clean	autoload/plug.vim	/^function! s:clean(force)$/;"	f
+color	colors/jellybeans.vim	/^fun! s:color(r, g, b)$/;"	f
+colors_name	colors/hybrid.vim	/^let colors_name = "hybrid"$/;"	v
+colors_name	colors/ir_black.vim	/^let colors_name = "ir_black"$/;"	v
+colors_name	colors/jellybeans.vim	/^let colors_name = "jellybeans"$/;"	v
+compare_git_uri	autoload/plug.vim	/^function! s:compare_git_uri(a, b)$/;"	f
+define_commands	autoload/plug.vim	/^function! s:define_commands()$/;"	f
+delete	autoload/plug.vim	/^function! s:delete(range, force)$/;"	f
+delete_op	autoload/plug.vim	/^function! s:delete_op(type, ...)$/;"	f
+diff	autoload/plug.vim	/^function! s:diff()$/;"	f
+dirpath	autoload/plug.vim	/^  function! s:dirpath(path)$/;"	f
+do	autoload/plug.vim	/^function! s:do(pull, force, todo)$/;"	f
+doautocmd	autoload/plug.vim	/^function! s:doautocmd(...)$/;"	f
+dobufread	autoload/plug.vim	/^function! s:dobufread(names)$/;"	f
+err	autoload/plug.vim	/^function! s:err(msg)$/;"	f
+esc	autoload/plug.vim	/^function! s:esc(path)$/;"	f
+escrtp	autoload/plug.vim	/^function! s:escrtp(path)$/;"	f
+extract_name	autoload/plug.vim	/^function! s:extract_name(str, prefix, suffix)$/;"	f
+f	init.vim	/^nmap f <plug>(glowshi-ft-f)$/;"	m
+f	init.vim	/^vmap f <plug>(glowshi-ft-f)$/;"	m
+find_name	autoload/plug.vim	/^function! s:find_name(lnum)$/;"	f
+finish	autoload/plug.vim	/^function! s:finish(pull)$/;"	f
+finish_bindings	autoload/plug.vim	/^function! s:finish_bindings()$/;"	f
+format_git_log	autoload/plug.vim	/^function! s:format_git_log(line)$/;"	f
+format_message	autoload/plug.vim	/^function! s:format_message(bullet, name, message)$/;"	f
+g:NERDTreeShowBookmarkd	init.vim	/^let g:NERDTreeShowBookmarkd=1$/;"	v
+g:UltiSnipsEditSplit	init.vim	/^let g:UltiSnipsEditSplit="vertical"$/;"	v
+g:UltiSnipsExpandTrigger	init.vim	/^let g:UltiSnipsExpandTrigger="<A-space>"$/;"	v
+g:UltiSnipsJumpBackwardTrigger	init.vim	/^let g:UltiSnipsJumpBackwardTrigger="<c-k>"$/;"	v
+g:UltiSnipsJumpForwardTrigger	init.vim	/^let g:UltiSnipsJumpForwardTrigger="<c-j>"$/;"	v
+g:bookmark_no_default_key_mappings	init.vim	/^let g:bookmark_no_default_key_mappings = 1$/;"	v
+g:colors_name	colors/dan_custom.vim	/^let g:colors_name = "dan_custom"$/;"	v
+g:colors_name	colors/distinguished.vim	/^	let g:colors_name = 'distinguished'$/;"	v
+g:colors_name	colors/distinguished_dan.vim	/^	let g:colors_name = 'distinguished_dan'$/;"	v
+g:gitgutter_sign_added	init.vim	/^let g:gitgutter_sign_added = '✚'$/;"	v
+g:gitgutter_sign_modified	init.vim	/^let g:gitgutter_sign_modified = ''$/;"	v
+g:gitgutter_sign_modified_removed	init.vim	/^let g:gitgutter_sign_modified_removed = '⚑'$/;"	v
+g:gitgutter_sign_removed	init.vim	/^let g:gitgutter_sign_removed = '↩'$/;"	v
+g:gitgutter_sign_removed_first_line	init.vim	/^let g:gitgutter_sign_removed_first_line = '▲'$/;"	v
+g:glowshi_ft_no_default_key_mappings	init.vim	/^let g:glowshi_ft_no_default_key_mappings = 1$/;"	v
+g:hybrid_use_Xresources	colors/hybrid.vim	/^  let g:hybrid_use_Xresources = 0$/;"	v
+g:hybrid_use_iTerm_colors	colors/hybrid.vim	/^  let g:hybrid_use_iTerm_colors = 0$/;"	v
+g:indent_guides_auto_colors	colors/jellybeans.vim	/^  let g:indent_guides_auto_colors = 0$/;"	v
+g:jellybeans_background_color	colors/jellybeans.vim	/^  let g:jellybeans_background_color = "151515"$/;"	v
+g:jellybeans_background_color_256	colors/jellybeans.vim	/^  let g:jellybeans_background_color_256=233$/;"	v
+g:lightline	init.vim	/^let g:lightline = {$/;"	v
+g:loaded_plug	autoload/plug.vim	/^let g:loaded_plug = 1$/;"	v
+g:local_config_file	init.vim	/^let g:local_config_file = "~\/.config\/nvim\/local.vim"$/;"	v
+g:mapleader	init.vim	/^let g:mapleader = '\\'$/;"	v
+g:maplocalleader	init.vim	/^let g:maplocalleader = ','$/;"	v
+g:plugs_order	autoload/plug.vim	/^  let g:plugs_order = get(g:, 'plugs_order', keys(g:plugs))$/;"	v
+g:rbpt_colorpairs	init.vim	/^let g:rbpt_colorpairs = [$/;"	v
+g:rbpt_max	init.vim	/^let g:rbpt_max = 16$/;"	v
+g:rpt_loadcmd_toggle	init.vim	/^let g:rpt_loadcmd_toggle = 0$/;"	v
+g:session_autoload	init.vim	/^let g:session_autoload = 'yes'$/;"	v
+g:session_autosave	init.vim	/^let g:session_autosave = 'yes'$/;"	v
+g:session_autosave_periodic	init.vim	/^let g:session_autosave_periodic = 1$/;"	v
+g:session_default_overwrite	init.vim	/^let g:session_default_overwrite = 1$/;"	v
+g:skipview_files	init.vim	/^let g:skipview_files = [ '[EXAMPLE PLUGIN BUFFER]' ]$/;"	v
+g:sparkupExecuteMapping	init.vim	/^let g:sparkupExecuteMapping = '<c-e>'$/;"	v
+g:sparkupMapsNormal	init.vim	/^let g:sparkupMapsNormal = 1$/;"	v
+g:sparkupNextMapping	init.vim	/^let g:sparkupNextMapping = '<c-s>'$/;"	v
+g:syntastic_aggregate_errors	init.vim	/^let g:syntastic_aggregate_errors = 1$/;"	v
+g:syntastic_cpp_checkers	init.vim	/^let g:syntastic_cpp_checkers = ['cppcheck', 'gcc']$/;"	v
+g:syntastic_cpp_compiler	init.vim	/^let g:syntastic_cpp_compiler = "clang++"$/;"	v
+g:syntastic_cpp_compiler_options	init.vim	/^let g:syntastic_cpp_compiler_options = "-std=c++17"$/;"	v
+g:syntastic_python_pylint_args	init.vim	/^let g:syntastic_python_pylint_args = "--rcfile="$/;"	v
+g:syntastic_typescript_checks	init.vim	/^let g:syntastic_typescript_checks=['tsc', 'tslint']$/;"	v
+g:syntastic_typescript_tsc_args	init.vim	/^let g:syntastic_typescript_tsc_args=['--target', 'ES2015', '--jsx', 'react']$/;"	v
+g:tmux_navigator_no_mappings	init.vim	/^let g:tmux_navigator_no_mappings = 1$/;"	v
+g:typescript_compiler_options	init.vim	/^let g:typescript_compiler_options = '--jsx "react" --target "ES2015"'$/;"	v
+g:undotree_DiffAutoOpen	init.vim	/^let g:undotree_DiffAutoOpen = 1$/;"	v
+g:undotree_DiffpanelHeight	init.vim	/^let g:undotree_DiffpanelHeight = 12$/;"	v
+g:undotree_SetFocusWhenToggle	init.vim	/^let g:undotree_SetFocusWhenToggle = 1$/;"	v
+g:undotree_SplitWidth	init.vim	/^let g:undotree_SplitWidth = 45$/;"	v
+g:undotree_TreeNodeShape	init.vim	/^let g:undotree_TreeNodeShape = '◈'$/;"	v
+g:undotree_WindowLayout	init.vim	/^let g:undotree_WindowLayout = 3$/;"	v
+git_validate	autoload/plug.vim	/^function! s:git_validate(spec, check_branch)$/;"	f
+git_version_requirement	autoload/plug.vim	/^function! s:git_version_requirement(...)$/;"	f
+glob	autoload/plug.vim	/^function! s:glob(from, pattern)$/;"	f
+glob_dir	autoload/plug.vim	/^function! s:glob_dir(path)$/;"	f
+grey_color	colors/jellybeans.vim	/^fun! s:grey_color(n)$/;"	f
+grey_level	colors/jellybeans.vim	/^fun! s:grey_level(n)$/;"	f
+grey_number	colors/jellybeans.vim	/^fun! s:grey_number(x)$/;"	f
+hash_match	autoload/plug.vim	/^function! s:hash_match(a, b)$/;"	f
+infer_properties	autoload/plug.vim	/^function! s:infer_properties(name, repo)$/;"	f
+install	autoload/plug.vim	/^function! s:install(force, names)$/;"	f
+is_local_plug	autoload/plug.vim	/^  function! s:is_local_plug(repo)$/;"	f
+is_managed	autoload/plug.vim	/^function! s:is_managed(name)$/;"	f
+is_preview_window_open	autoload/plug.vim	/^function! s:is_preview_window_open()$/;"	f
+is_updated	autoload/plug.vim	/^function! s:is_updated(dir)$/;"	f
+job_abort	autoload/plug.vim	/^function! s:job_abort()$/;"	f
+job_handler	autoload/plug.vim	/^function! s:job_handler(job_id, data, event) abort$/;"	f
+lastline	autoload/plug.vim	/^function! s:lastline(msg)$/;"	f
+lines	autoload/plug.vim	/^function! s:lines(msg)$/;"	f
+load_colors	colors/jellybeans.vim	/^  fun! s:load_colors(defs)$/;"	f
+load_plugin	autoload/plug.vim	/^function! s:load_plugin(spec)$/;"	f
+loaded_names	autoload/plug.vim	/^function! s:loaded_names()$/;"	f
+lod	autoload/plug.vim	/^function! s:lod(names, types, ...)$/;"	f
+lod_cmd	autoload/plug.vim	/^function! s:lod_cmd(cmd, bang, l1, l2, args, names)$/;"	f
+lod_ft	autoload/plug.vim	/^function! s:lod_ft(pat, names)$/;"	f
+lod_map	autoload/plug.vim	/^function! s:lod_map(map, names, prefix)$/;"	f
+log	autoload/plug.vim	/^function! s:log(bullet, name, lines)$/;"	f
+log4	autoload/plug.vim	/^function! s:log4(name, msg)$/;"	f
+logpos	autoload/plug.vim	/^function! s:logpos(name)$/;"	f
+lpad	autoload/plug.vim	/^function! s:lpad(str, len)$/;"	f
+names	autoload/plug.vim	/^function! s:names(...)$/;"	f
+new_window	autoload/plug.vim	/^function! s:new_window()$/;"	f
+parse_options	autoload/plug.vim	/^function! s:parse_options(arg)$/;"	f
+path	autoload/plug.vim	/^  function! s:path(path)$/;"	f
+plug#	autoload/plug.vim	/^function! plug#(repo, ...)$/;"	f
+plug#begin	autoload/plug.vim	/^function! plug#begin(...)$/;"	f
+plug#end	autoload/plug.vim	/^function! plug#end()$/;"	f
+plug#helptags	autoload/plug.vim	/^function! plug#helptags()$/;"	f
+plug#load	autoload/plug.vim	/^function! plug#load(...)$/;"	f
+plug_window_exists	autoload/plug.vim	/^function! s:plug_window_exists()$/;"	f
+prepare	autoload/plug.vim	/^function! s:prepare(...)$/;"	f
+preview_commit	autoload/plug.vim	/^function! s:preview_commit()$/;"	f
+progress_bar	autoload/plug.vim	/^function! s:progress_bar(line, bar, total)$/;"	f
+progress_opt	autoload/plug.vim	/^function! s:progress_opt(base)$/;"	f
+reap	autoload/plug.vim	/^function! s:reap(name)$/;"	f
+regress_bar	autoload/plug.vim	/^function! s:regress_bar()$/;"	f
+reload_plugins	autoload/plug.vim	/^function! s:reload_plugins()$/;"	f
+remove_rtp	autoload/plug.vim	/^function! s:remove_rtp()$/;"	f
+remove_triggers	autoload/plug.vim	/^function! s:remove_triggers(name)$/;"	f
+reorg_rtp	autoload/plug.vim	/^function! s:reorg_rtp()$/;"	f
+retry	autoload/plug.vim	/^function! s:retry()$/;"	f
+revert	autoload/plug.vim	/^function! s:revert()$/;"	f
+rgb	colors/jellybeans.vim	/^fun! s:rgb(rgb)$/;"	f
+rgb_color	colors/jellybeans.vim	/^fun! s:rgb_color(x, y, z)$/;"	f
+rgb_level	colors/jellybeans.vim	/^fun! s:rgb_level(n)$/;"	f
+rgb_number	colors/jellybeans.vim	/^fun! s:rgb_number(x)$/;"	f
+rm_rf	autoload/plug.vim	/^function! s:rm_rf(dir)$/;"	f
+rtp	autoload/plug.vim	/^  function! s:rtp(spec)$/;"	f
+s:TYPE	autoload/plug.vim	/^let s:TYPE = {$/;"	v
+s:addbg	colors/hybrid.vim	/^  let s:addbg      = "#5F875F"$/;"	v
+s:addbg	colors/hybrid.vim	/^  let s:addbg      = "65"$/;"	v
+s:addfg	colors/hybrid.vim	/^  let s:addfg      = "#d7ffaf"$/;"	v
+s:addfg	colors/hybrid.vim	/^  let s:addfg      = "193"$/;"	v
+s:aqua	colors/hybrid.vim	/^    let s:aqua       = "109"$/;"	v
+s:aqua	colors/hybrid.vim	/^    let s:aqua       = "14"   " LightCyan$/;"	v
+s:aqua	colors/hybrid.vim	/^    let s:aqua       = "6"$/;"	v
+s:aqua	colors/hybrid.vim	/^  let s:aqua       = "#8abeb7"$/;"	v
+s:b	colors/hybrid.vim	/^let s:b      = ",bold"$/;"	v
+s:background	colors/hybrid.vim	/^    let s:background = "NONE"$/;"	v
+s:background	colors/hybrid.vim	/^  let s:background = "#1d1f21"$/;"	v
+s:background	colors/hybrid.vim	/^  let s:background = "234"$/;"	v
+s:base_spec	autoload/plug.vim	/^let s:base_spec = { 'branch': 'master', 'frozen': 0 }$/;"	v
+s:blue	colors/hybrid.vim	/^    let s:blue       = "110"$/;"	v
+s:blue	colors/hybrid.vim	/^    let s:blue       = "12"   " LightBlue$/;"	v
+s:blue	colors/hybrid.vim	/^    let s:blue       = "4"$/;"	v
+s:blue	colors/hybrid.vim	/^  let s:blue       = "#81a2be"$/;"	v
+s:c	colors/hybrid.vim	/^let s:c      = ",undercurl"$/;"	v
+s:changebg	colors/hybrid.vim	/^  let s:changebg   = "#5F5F87"$/;"	v
+s:changebg	colors/hybrid.vim	/^  let s:changebg   = "60"$/;"	v
+s:changefg	colors/hybrid.vim	/^  let s:changefg   = "#d7d7ff"$/;"	v
+s:changefg	colors/hybrid.vim	/^  let s:changefg   = "189"$/;"	v
+s:comment	colors/hybrid.vim	/^    let s:comment    = "15"$/;"	v
+s:comment	colors/hybrid.vim	/^    let s:comment    = "243"$/;"	v
+s:comment	colors/hybrid.vim	/^    let s:comment    = "7"    " LightGrey$/;"	v
+s:comment	colors/hybrid.vim	/^  let s:comment    = "#707880"$/;"	v
+s:cpo_save	autoload/plug.vim	/^let s:cpo_save = &cpo$/;"	v
+s:darkblue	colors/hybrid.vim	/^  let s:darkblue   = "#00005f"$/;"	v
+s:darkblue	colors/hybrid.vim	/^  let s:darkblue   = "17"$/;"	v
+s:darkcolumn	colors/hybrid.vim	/^  let s:darkcolumn = "#1c1c1c"$/;"	v
+s:darkcolumn	colors/hybrid.vim	/^  let s:darkcolumn = "234"$/;"	v
+s:darkcyan	colors/hybrid.vim	/^  let s:darkcyan   = "#005f5f"$/;"	v
+s:darkcyan	colors/hybrid.vim	/^  let s:darkcyan   = "24"$/;"	v
+s:darkpurple	colors/hybrid.vim	/^  let s:darkpurple = "#5f005f"$/;"	v
+s:darkpurple	colors/hybrid.vim	/^  let s:darkpurple = "53"$/;"	v
+s:darkred	colors/hybrid.vim	/^  let s:darkred    = "#5f0000"$/;"	v
+s:darkred	colors/hybrid.vim	/^  let s:darkred    = "52"$/;"	v
+s:first_rtp	autoload/plug.vim	/^let s:first_rtp = s:escrtp(get(s:split_rtp(), 0, ''))$/;"	v
+s:foreground	colors/hybrid.vim	/^    let s:foreground = "15"   " White$/;"	v
+s:foreground	colors/hybrid.vim	/^    let s:foreground = "250"$/;"	v
+s:foreground	colors/hybrid.vim	/^    let s:foreground = "7"$/;"	v
+s:foreground	colors/hybrid.vim	/^  let s:foreground = "#c5c8c6"$/;"	v
+s:green	colors/hybrid.vim	/^    let s:green      = "10"   " LightGreen$/;"	v
+s:green	colors/hybrid.vim	/^    let s:green      = "143"$/;"	v
+s:green	colors/hybrid.vim	/^    let s:green      = "2"$/;"	v
+s:green	colors/hybrid.vim	/^  let s:green      = "#b5bd68"$/;"	v
+s:i	colors/hybrid.vim	/^let s:i      = ",italic"$/;"	v
+s:is_win	autoload/plug.vim	/^let s:is_win = has('win32') || has('win64')$/;"	v
+s:last_rtp	autoload/plug.vim	/^let s:last_rtp  = s:escrtp(get(s:split_rtp(), -1, ''))$/;"	v
+s:line	colors/hybrid.vim	/^    let s:line       = "0"    " Black$/;"	v
+s:line	colors/hybrid.vim	/^    let s:line       = "0"$/;"	v
+s:line	colors/hybrid.vim	/^    let s:line       = "235"$/;"	v
+s:line	colors/hybrid.vim	/^  let s:line       = "#282a2e"$/;"	v
+s:loaded	autoload/plug.vim	/^let s:loaded = get(s:, 'loaded', {})$/;"	v
+s:low_color	colors/jellybeans.vim	/^  let s:low_color = 0$/;"	v
+s:low_color	colors/jellybeans.vim	/^  let s:low_color = 1$/;"	v
+s:mac_gui	autoload/plug.vim	/^let s:mac_gui = has('gui_macvim') && has('gui_running')$/;"	v
+s:me	autoload/plug.vim	/^let s:me = resolve(expand('<sfile>:p'))$/;"	v
+s:n	colors/hybrid.vim	/^let s:n      = "NONE"$/;"	v
+s:none	colors/hybrid.vim	/^let s:none   = "NONE"$/;"	v
+s:nvim	autoload/plug.vim	/^let s:nvim = has('nvim') && exists('*jobwait') && !s:is_win$/;"	v
+s:orange	colors/hybrid.vim	/^    let s:orange     = "11"$/;"	v
+s:orange	colors/hybrid.vim	/^    let s:orange     = "173"$/;"	v
+s:orange	colors/hybrid.vim	/^    let s:orange     = "3"    " DarkYellow$/;"	v
+s:orange	colors/hybrid.vim	/^  let s:orange     = "#de935f"$/;"	v
+s:plug_buf	autoload/plug.vim	/^let s:plug_buf = get(s:, 'plug_buf', -1)$/;"	v
+s:plug_src	autoload/plug.vim	/^let s:plug_src = 'https:\/\/github.com\/junegunn\/vim-plug.git'$/;"	v
+s:plug_tab	autoload/plug.vim	/^let s:plug_tab = get(s:, 'plug_tab', -1)$/;"	v
+s:purple	colors/hybrid.vim	/^    let s:purple     = "13"   " LightMagenta$/;"	v
+s:purple	colors/hybrid.vim	/^    let s:purple     = "139"$/;"	v
+s:purple	colors/hybrid.vim	/^    let s:purple     = "5"$/;"	v
+s:purple	colors/hybrid.vim	/^  let s:purple     = "#b294bb"$/;"	v
+s:r	colors/hybrid.vim	/^let s:r      = ",reverse"$/;"	v
+s:red	colors/hybrid.vim	/^    let s:red        = "1"$/;"	v
+s:red	colors/hybrid.vim	/^    let s:red        = "167"$/;"	v
+s:red	colors/hybrid.vim	/^    let s:red        = "9"    " LightRed$/;"	v
+s:red	colors/hybrid.vim	/^  let s:red        = "#cc6666"$/;"	v
+s:s	colors/hybrid.vim	/^let s:s      = ",standout"$/;"	v
+s:selection	colors/hybrid.vim	/^    let s:selection  = "0"$/;"	v
+s:selection	colors/hybrid.vim	/^    let s:selection  = "237"$/;"	v
+s:selection	colors/hybrid.vim	/^    let s:selection  = "8"    " DarkGrey$/;"	v
+s:selection	colors/hybrid.vim	/^  let s:selection  = "#373b41"$/;"	v
+s:sp_addbg	colors/hybrid.vim	/^  let s:sp_addbg      = ""$/;"	v
+s:sp_addfg	colors/hybrid.vim	/^  let s:sp_addfg      = ""$/;"	v
+s:sp_aqua	colors/hybrid.vim	/^  let s:sp_aqua       = ""$/;"	v
+s:sp_background	colors/hybrid.vim	/^  let s:sp_background = ""$/;"	v
+s:sp_blue	colors/hybrid.vim	/^  let s:sp_blue       = ""$/;"	v
+s:sp_changebg	colors/hybrid.vim	/^  let s:sp_changebg   = ""$/;"	v
+s:sp_changefg	colors/hybrid.vim	/^  let s:sp_changefg   = ""$/;"	v
+s:sp_comment	colors/hybrid.vim	/^  let s:sp_comment    = ""$/;"	v
+s:sp_darkblue	colors/hybrid.vim	/^  let s:sp_darkblue   = ""$/;"	v
+s:sp_darkcyan	colors/hybrid.vim	/^  let s:sp_darkcyan   = ""$/;"	v
+s:sp_darkpurple	colors/hybrid.vim	/^  let s:sp_darkpurple = ""$/;"	v
+s:sp_darkred	colors/hybrid.vim	/^  let s:sp_darkred    = ""$/;"	v
+s:sp_foreground	colors/hybrid.vim	/^  let s:sp_foreground = ""$/;"	v
+s:sp_green	colors/hybrid.vim	/^  let s:sp_green      = ""$/;"	v
+s:sp_line	colors/hybrid.vim	/^  let s:sp_line       = ""$/;"	v
+s:sp_none	colors/hybrid.vim	/^  let s:sp_none       = ""$/;"	v
+s:sp_orange	colors/hybrid.vim	/^  let s:sp_orange     = ""$/;"	v
+s:sp_purple	colors/hybrid.vim	/^  let s:sp_purple     = ""$/;"	v
+s:sp_red	colors/hybrid.vim	/^  let s:sp_red        = ""$/;"	v
+s:sp_selection	colors/hybrid.vim	/^  let s:sp_selection  = ""$/;"	v
+s:sp_window	colors/hybrid.vim	/^  let s:sp_window     = ""$/;"	v
+s:sp_yellow	colors/hybrid.vim	/^  let s:sp_yellow     = ""$/;"	v
+s:t_none	colors/hybrid.vim	/^let s:t_none = "NONE"$/;"	v
+s:termBlack	colors/jellybeans.vim	/^    let s:termBlack = "Black"$/;"	v
+s:termBlack	colors/jellybeans.vim	/^    let s:termBlack = "Grey"$/;"	v
+s:triggers	autoload/plug.vim	/^let s:triggers = get(s:, 'triggers', {})$/;"	v
+s:u	colors/hybrid.vim	/^let s:u      = ",underline"$/;"	v
+s:vmode	colors/hybrid.vim	/^  let s:vmode      = "cterm"$/;"	v
+s:vmode	colors/hybrid.vim	/^  let s:vmode      = "gui"$/;"	v
+s:window	colors/hybrid.vim	/^  let s:window     = "#303030"$/;"	v
+s:window	colors/hybrid.vim	/^  let s:window     = "236"$/;"	v
+s:yellow	colors/hybrid.vim	/^    let s:yellow     = "11"   " LightYellow$/;"	v
+s:yellow	colors/hybrid.vim	/^    let s:yellow     = "221"$/;"	v
+s:yellow	colors/hybrid.vim	/^    let s:yellow     = "3"$/;"	v
+s:yellow	colors/hybrid.vim	/^  let s:yellow     = "#f0c674"$/;"	v
+section	autoload/plug.vim	/^function! s:section(flags)$/;"	f
+shellesc	autoload/plug.vim	/^function! s:shellesc(arg)$/;"	f
+snapshot	autoload/plug.vim	/^function! s:snapshot(force, ...) abort$/;"	f
+source	autoload/plug.vim	/^function! s:source(from, ...)$/;"	f
+spawn	autoload/plug.vim	/^function! s:spawn(name, cmd, opts)$/;"	f
+split_rtp	autoload/plug.vim	/^function! s:split_rtp()$/;"	f
+status	autoload/plug.vim	/^function! s:status()$/;"	f
+status_load	autoload/plug.vim	/^function! s:status_load(lnum)$/;"	f
+status_update	autoload/plug.vim	/^function! s:status_update() range$/;"	f
+switch_in	autoload/plug.vim	/^function! s:switch_in()$/;"	f
+switch_out	autoload/plug.vim	/^function! s:switch_out(...)$/;"	f
+syntax	autoload/plug.vim	/^function! s:syntax()$/;"	f
+system	autoload/plug.vim	/^function! s:system(cmd, ...)$/;"	f
+system_chomp	autoload/plug.vim	/^function! s:system_chomp(...)$/;"	f
+t	init.vim	/^nmap t <plug>(glowshi-ft-t)$/;"	m
+t	init.vim	/^vmap t <plug>(glowshi-ft-t)$/;"	m
+tick	autoload/plug.vim	/^function! s:tick()$/;"	f
+to_a	autoload/plug.vim	/^function! s:to_a(v)$/;"	f
+to_s	autoload/plug.vim	/^function! s:to_s(v)$/;"	f
+trim	autoload/plug.vim	/^function! s:trim(str)$/;"	f
+update	autoload/plug.vim	/^function! s:update(force, names)$/;"	f
+update_finish	autoload/plug.vim	/^function! s:update_finish()$/;"	f
+update_impl	autoload/plug.vim	/^function! s:update_impl(pull, force, args) abort$/;"	f
+update_python	autoload/plug.vim	/^function! s:update_python()$/;"	f
+update_ruby	autoload/plug.vim	/^function! s:update_ruby()$/;"	f
+update_vim	autoload/plug.vim	/^function! s:update_vim()$/;"	f
+upgrade	autoload/plug.vim	/^function! s:upgrade()$/;"	f
+upgrade_specs	autoload/plug.vim	/^function! s:upgrade_specs()$/;"	f
+version_requirement	autoload/plug.vim	/^function! s:version_requirement(val, min)$/;"	f
+warn	autoload/plug.vim	/^function! s:warn(cmd, msg)$/;"	f
+with_cd	autoload/plug.vim	/^function! s:with_cd(cmd, dir)$/;"	f
+zz	init.vim	/^nnoremap zz z=$/;"	m
