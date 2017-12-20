@@ -47,7 +47,6 @@
    trustExitCode = true
 [commit]
    gpgsign = false
-   # gpgsign = false
 [diff]
    difftool = splice
 [core]
